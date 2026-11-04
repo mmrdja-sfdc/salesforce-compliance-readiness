@@ -3,259 +3,299 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Close the Compliance Gap</title>
+  <title>Salesforce Compliance Checklist | Close the Compliance Gap</title>
+  <meta name="description" content="Map your audit, SOC 2, cyber insurance, and security questionnaire requests to the evidence you can produce on Salesforce, including which agent ran on which data." />
+  <!-- SALES: to change where the call-to-action links point, edit the href on each link with class="cta". -->
   <style>
     :root {
       --ink: #032d60;
       --muted: #032d60;
+      --soft-text: #3e5470;
       --line: #c5dff8;
       --paper: #e5f2ff;
       --card: #ffffff;
       --accent: #0176d3;
       --bright: #0b5fff;
-      --cloud: #0176d3;
+      --deep: #022ac0;
       --accent-soft: #e8f4ff;
-      --ask: #032d60;
-      --ask-bg: #f4f9ff;
+      --warn: #b3261e;
+      --warn-bg: #fdeceb;
+      --ok: #0a6b3d;
+      --ok-bg: #e6f5ec;
       --shadow: 0 16px 40px rgba(3, 45, 96, 0.08);
     }
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
     body {
       margin: 0;
       font-family: "Salesforce Sans", "Avant Garde", "Segoe UI", Helvetica, Arial, sans-serif;
       color: var(--ink);
-      background: #e5f2ff;
-      line-height: 1.45;
+      background: var(--paper);
+      line-height: 1.5;
     }
-    header {
-      position: relative; overflow: hidden;
-      background: #032d60;
-      color: white;
-      padding: 56px 24px 44px;
-    }
-    .wrap { max-width: none; margin: 0 40px; }
-    
-    header h1 { margin: 0 0 12px; font-size: 44px; letter-spacing: -0.035em; line-height: 1.05; max-width: 740px; }
-    header p { margin: 0; max-width: 640px; color: #ffffff; font-size: 18px; }
-    .lede { margin-top: 16px; font-size: 15px; color: #d6ebff; }
-    main { padding: 32px 24px 72px; }
-    h2 { font-size: 28px; letter-spacing: -0.03em; color: var(--ink); margin: 0 0 14px; font-weight: 800; }
-    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-    button.chip {
-      border: 0;
-      background: white;
-      color: var(--ink);
-      border-radius: 999px;
-      padding: 10px 16px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 6px 16px rgba(3, 45, 96, 0.08);
-    }
-    button.chip[aria-pressed="true"] {
-      background: var(--bright);
-      color: white;
-    }
-    .split { margin-top: 18px; font-size: 16px; color: var(--muted); max-width: 760px; }
-    .split strong { color: var(--ink); }
-    .grid { display: grid; gap: 18px; margin-top: 26px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-    article.card {
-      background: var(--card);
-      border: 0;
-      border-radius: 28px;
-      padding: 22px 22px 18px;
-      box-shadow: var(--shadow);
-    }
-    .card-top { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
-    .area {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: var(--bright); color: white;
-      display: grid; place-items: center;
-      font-size: 13px; font-weight: 800;
-    }
-    .product {
-      font-size: 13px;
-      font-weight: 700;
-      background: var(--accent-soft);
-      color: var(--bright);
-      border-radius: 999px;
-      padding: 6px 12px;
-      white-space: nowrap;
-    }
-    h3 { margin: 14px 0 6px; font-size: 26px; letter-spacing: -0.03em; }
-    .cite { color: var(--bright); font-size: 14px; font-weight: 700; margin: 0 0 10px; }
-    .value { margin: 0; font-size: 16px; color: var(--ink); }
-    .ask {
-      margin-top: 14px;
-      background: var(--ask-bg);
-      color: var(--ask);
-      border-radius: 16px;
-      padding: 12px 14px;
-      font-size: 14px;
-    }
-    .ask span { font-weight: 700; }
-    footer.note {
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 14px;
-    }
+    a { color: var(--bright); }
+    :focus-visible { outline: 3px solid #ffb700; outline-offset: 2px; border-radius: 6px; }
+    .skip { position: absolute; left: -999px; top: 8px; background: white; padding: 8px 12px; border-radius: 8px; z-index: 20; }
+    .skip:focus { left: 8px; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+    header { position: relative; overflow: hidden; background: #032d60; color: white; padding: 56px 0 44px; }
+    header h1 { margin: 0 0 12px; font-size: clamp(32px, 5vw, 46px); letter-spacing: -0.035em; line-height: 1.05; max-width: 820px; }
+    header .lede { margin: 16px 0 0; max-width: 960px; color: #ffffff; font-size: 18px; line-height: 1.5; font-weight: 300; }
+    .spark { position: absolute; opacity: 0.9; }
+    .btn { display: inline-block; border: 0; cursor: pointer; text-decoration: none; font: inherit; font-weight: 800; font-size: 16px; padding: 12px 22px; border-radius: 999px; background: white; color: var(--deep); }
+    .btn.solid { background: var(--ink); color: white; }
+    .btn.solid:hover { background: var(--bright); }
+    .btn.ghost { background: white; color: var(--ink); box-shadow: 0 4px 12px rgba(3,45,96,.12); font-size: 14px; padding: 9px 16px; }
+    header .btn { margin-top: 22px; }
+
+    nav.toc { position: sticky; top: 0; z-index: 10; background: rgba(229,242,255,.96); border-bottom: 1px solid var(--line); }
+    nav.toc .wrap { display: flex; gap: 6px; overflow-x: auto; padding-top: 8px; padding-bottom: 8px; }
+    nav.toc a { white-space: nowrap; text-decoration: none; color: var(--ink); font-weight: 700; font-size: 14px; padding: 7px 12px; border-radius: 999px; }
+    nav.toc a:hover { background: white; }
+
+    section { padding: 44px 0 4px; }
+    h2 { font-size: clamp(24px, 3.2vw, 32px); letter-spacing: -0.03em; margin: 0 0 8px; font-weight: 800; }
+    .sub { color: var(--soft-text); font-size: 17px; max-width: 780px; margin: 0 0 22px; }
+    h3 { margin: 0 0 8px; font-size: 20px; letter-spacing: -0.02em; }
+
+    .cards { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .card { background: var(--card); border-radius: 22px; padding: 22px; box-shadow: var(--shadow); }
+    .card p, .card li { font-size: 15px; }
+    .card ul { padding-left: 18px; margin: 8px 0 0; }
+    .card li { margin-bottom: 6px; }
+    .tag { display: inline-block; font-size: 13px; font-weight: 800; padding: 5px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--bright); margin-bottom: 10px; }
+    .tag.warn { background: var(--warn-bg); color: var(--warn); }
+    .tag.ok { background: var(--ok-bg); color: var(--ok); }
+
+    .rolo { display: flex; align-items: center; gap: 12px; }
+    .rolo-stage { position: relative; flex: 1; height: 250px; perspective: 1200px; overflow-x: clip; }
+    .rcard { position: absolute; top: 12px; bottom: 12px; left: 33%; width: 34%; display: flex; flex-direction: column; justify-content: center; transition: transform .45s ease, opacity .45s ease; cursor: pointer; }
+    .rcard h3 { font-size: 22px; }
+    .rcard p { font-size: 16px; }
+    .rcard.active { cursor: default; }
+    .rolo-btn { flex: none; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--ink); color: white; font-size: 30px; line-height: 1; cursor: pointer; box-shadow: 0 6px 16px rgba(3,45,96,.2); }
+    .rolo-btn:hover { background: var(--bright); }
+    .rolo-dots { display: flex; justify-content: center; gap: 8px; margin-top: 8px; }
+    .rolo-dots i { width: 10px; height: 10px; border-radius: 50%; background: #9ec9f5; transition: background .2s, transform .2s; }
+    .rolo-dots i.on { background: var(--bright); transform: scale(1.25); }
+    @media (max-width: 760px) { .rcard { left: 4%; width: 92%; } .rolo-stage { height: 290px; } .rolo-btn { width: 40px; height: 40px; font-size: 26px; } }
+    .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; counter-reset: step; }
+    .step { background: white; border-radius: 22px; padding: 20px; box-shadow: var(--shadow); }
+    .step::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--deep); color: white; font-weight: 800; margin-bottom: 10px; }
+    .step.bad::before { background: var(--warn); }
+    .step p { margin: 0; font-size: 15px; }
+    .outcomes { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .outcomes span { background: var(--warn-bg); color: var(--warn); font-weight: 700; font-size: 14px; padding: 8px 14px; border-radius: 999px; }
+
+    .chain { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+    .link { background: var(--deep); color: white; border-radius: 18px; padding: 16px; }
+    .link strong { display: block; font-size: 18px; margin-bottom: 4px; }
+    .link span { font-size: 14px; color: #d6e6ff; }
+    .callout { margin-top: 16px; background: white; border-left: 6px solid var(--bright); border-radius: 14px; padding: 16px 18px; box-shadow: var(--shadow); font-size: 15px; }
+
+    /* explorer */
+    .tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 4px 0 14px; }
+    .tools input[type=search] { flex: 1 1 280px; max-width: 520px; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--line); font-size: 16px; font-family: inherit; color: var(--ink); background: white; box-shadow: 0 4px 12px rgba(3,45,96,0.05); }
+    .tools input[type=search]:focus { border-color: var(--bright); outline-offset: 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    button.chip { border: 0; background: white; color: var(--ink); border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 10px rgba(3,45,96,.08); }
+    button.chip[aria-pressed="true"] { background: var(--bright); color: white; }
+    .count { font-size: 14px; margin: 0 0 10px; min-height: 21px; }
+
     .map { margin-top: 8px; display: flex; flex-direction: column; gap: 16px; }
-    details.group {
-      background: transparent;
-    }
-    details.group > summary {
-      list-style: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-    details.group > summary::-webkit-details-marker { display: none; }
-    .dot {
-      width: 16px; height: 16px; border-radius: 50%;
-      background: var(--bright);
-      box-shadow: 0 0 0 6px rgba(11, 95, 255, 0.15);
-      flex: none;
-    }
-    .limbs { margin: 12px 0 8px 7px; border-left: 2px solid #9ec9f5; padding: 12px 0 8px 22px; display: flex; flex-direction: column; gap: 22px; }
-    details.std > summary {
-      list-style: none;
-      cursor: pointer;
-      font-weight: 800;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    details.std > summary::-webkit-details-marker { display: none; }
-    details.std > summary::before {
-      content: "";
-      width: 10px; height: 10px; border-radius: 50%;
-      background: #1b96ff;
-      flex: none;
-    }
-    .row { position: relative; }
-    .leaves {
-      margin: 14px 0 0 14px;
-      border-left: 2px solid #c5dff8;
-      padding: 4px 48px 12px 16px;
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: 420px;
-      gap: 14px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-    }
-    .next {
-      position: absolute;
-      right: 0;
-      top: 80px;
-      width: 42px;
-      height: 42px;
-      border: 0;
-      border-radius: 50%;
-      background: var(--bright);
-      color: white;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-    }
-    .leaf {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 8px 24px rgba(3,45,96,0.06);
-      min-height: 280px;
-    }
-    .leaf .product { display: inline-block; margin-bottom: 10px; }
-    .leaf h3 { font-size: 20px; margin: 0 0 6px; letter-spacing: -0.02em; }
-    .leaf .cite { margin: 0 0 10px; }
-    .leaf .why { font-size: 14px; font-weight: 700; margin: 10px 0 6px; }
-    .leaf ul { margin: 0; padding-left: 18px; }
-    .leaf li { font-size: 14px; margin: 0 0 6px; color: var(--ink); }
-    .leaf .risk { font-size: 14px; font-weight: 700; margin: 12px 0 6px; }
-    .leaf .how {
-      font-size: 13px;
-      margin: 12px 0 0;
-      background: #f4f9ff;
-      border-radius: 12px;
-      padding: 10px 12px;
-      color: var(--ink);
-    }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details.group > summary { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 800; letter-spacing: -0.03em; }
+    .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--bright); box-shadow: 0 0 0 6px rgba(11, 95, 255, 0.15); flex: none; }
+    details.group > summary::after { content: ""; width: 9px; height: 9px; border-right: 3px solid var(--bright); border-bottom: 3px solid var(--bright); transform: rotate(45deg); transition: transform .15s; margin-left: 4px; }
+    details.group:not([open]) > summary::after { transform: rotate(-45deg); }
+    .limbs { margin: 12px 0 8px 7px; border-left: 2px solid #9ec9f5; padding: 12px 0 8px 22px; display: flex; flex-direction: column; gap: 14px; }
+    details.std > summary { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; }
+    details.std > summary::before { content: ""; width: 9px; height: 9px; border-right: 3px solid #1b96ff; border-bottom: 3px solid #1b96ff; transform: rotate(-45deg); transition: transform .15s; flex: none; margin: 0 4px 0 2px; }
+    details.std[open] > summary::before { transform: rotate(45deg); }
+    details.std .n { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--soft-text); }
+    .leaves { margin: 14px 0 0 14px; border-left: 2px solid var(--line); padding: 4px 0 12px 16px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+    .leaf { background: white; border-radius: 16px; padding: 22px; box-shadow: 0 8px 24px rgba(3,45,96,0.06); display: flex; flex-direction: column; }
+    .leaf .product { display: inline-block; align-self: flex-start; font-size: 13px; font-weight: 700; background: var(--accent-soft); color: var(--bright); border-radius: 999px; padding: 6px 12px; margin-bottom: 10px; }
+    .leaf h3 { font-size: 20px; margin: 0 0 6px; }
+    .leaf .cite { color: var(--bright); font-size: 14px; font-weight: 700; margin: 0 0 10px; }
+    .leaf ul, .leaf ol { margin: 0; padding-left: 18px; }
+    .leaf li { font-size: 14px; margin: 0 0 6px; }
+    .leaf .how { font-size: 13px; margin: 6px 0 0; background: #f4f9ff; border-radius: 12px; padding: 10px 12px; }
     .leaf .how > span { font-weight: 800; display: block; margin-bottom: 6px; }
-    .leaf ol { margin: 0; padding-left: 18px; }
-    .leaf ol li { font-size: 13px; color: var(--muted); }
-    
-    .search-bar { margin: 24px 0 12px; }
-    .search-bar input {
-      width: 100%; max-width: 480px; padding: 14px 18px; border-radius: 12px;
-      border: 1px solid var(--line); font-size: 16px; font-family: inherit;
-      box-shadow: 0 4px 12px rgba(3,45,96,0.05); outline: none;
-    }
-    .search-bar input:focus { border-color: var(--bright); }
-    .gap-check {
-      display: flex; align-items: center; gap: 8px; font-size: 13px;
-      font-weight: 700; color: var(--warn); background: var(--warn-bg);
-      padding: 6px 12px; border-radius: 8px; cursor: pointer;
-      width: fit-content; margin-top: 20px;
-    }
-    .generator { margin-top: 40px; }
-    .gen-box {
-      background: white; border-radius: 24px; padding: 32px;
-      box-shadow: var(--shadow); max-width: 960px; margin: 0 auto;
-    }
-    .gen-box h3 { margin: 0 0 20px; font-size: 24px; letter-spacing: -0.02em; }
-    #gen-preview {
-      width: 100%; height: 320px; padding: 20px; border-radius: 16px;
-      border: 1px solid var(--line); font-family: inherit; font-size: 15px;
-      resize: vertical; margin-bottom: 20px; color: var(--ink);
-      background: var(--paper); outline: none; line-height: 1.5;
-    }
-    #gen-btn {
-      background: var(--ink); color: white; border: none; padding: 12px 24px;
-      font-size: 16px; font-weight: 800; border-radius: 999px; cursor: pointer;
-    }
-    #gen-btn:hover { background: var(--bright); }
+    .leaf details.more { margin-top: 12px; }
+    .leaf details.more > summary { font-size: 14px; font-weight: 800; color: var(--bright); }
+    .leaf details.more > summary::before { content: "+ "; }
+    .leaf details.more[open] > summary::before { content: "\2212 "; }
+    .leaf .lab { font-size: 14px; font-weight: 700; margin: 10px 0 6px; }
+    .leaf .lab.risk { color: var(--warn); }
+    .gap-check { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--warn); background: var(--warn-bg); padding: 8px 12px; border-radius: 8px; cursor: pointer; width: fit-content; margin-top: 16px; }
+    .gap-check input { width: 18px; height: 18px; accent-color: var(--warn); }
+
+    .generator { margin-top: 32px; }
+    .gen-box { background: white; border-radius: 24px; padding: 32px; box-shadow: var(--shadow); max-width: 960px; }
+    .gen-box h3 { margin: 0 0 8px; font-size: 24px; }
+    .gen-box p { margin: 0 0 16px; font-size: 15px; color: var(--soft-text); }
+    .sum-empty { font-style: italic; margin: 0; }
+    .sum-std { margin: 18px 0 6px; font-size: 17px; color: var(--ink); }
+    .sum-items { list-style: none; margin: 0; padding: 0; }
+    .sum-items li { margin: 0 0 6px; font-size: 15px; }
+    .sum-items label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
+    .sum-items input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--bright); flex: none; }
     .gen-out { margin-top: 12px; font-size: 14px; font-weight: 700; color: var(--ok); }
+
+    .matrix-wrap { overflow-x: auto; background: white; border-radius: 22px; box-shadow: var(--shadow); padding: 8px; }
+    table.matrix { border-collapse: collapse; width: 100%; min-width: 820px; font-size: 14px; }
+    .matrix th, .matrix td { padding: 8px 10px; text-align: center; border-bottom: 1px solid var(--line); }
+    .matrix th:first-child, .matrix td:first-child { text-align: left; font-weight: 700; }
+    .matrix thead th { font-size: 13px; }
+    .matrix button { border: 0; background: var(--bright); color: white; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; }
+    .matrix button:hover { background: var(--deep); }
+    .matrix .none { color: #7a8ea8; }
+
+    .prod .lab { font-size: 13px; font-weight: 800; margin: 12px 0 2px; }
+    .prod .risk { color: var(--warn); }
+
+    .cta-band { background: linear-gradient(115deg, #022ac0, #0b5fff); color: white; border-radius: 28px; padding: 32px; }
+    .cta-band h2 { color: white; }
+    .cta-band p, .cta-band li { color: #e3f0ff; max-width: 720px; font-size: 16px; }
+    .cta-band ul { padding-left: 20px; }
+
+    footer { padding: 40px 0 64px; font-size: 14px; }
+    footer h2 { font-size: 20px; }
+    footer li { margin-bottom: 6px; }
+    @media (max-width: 640px) { .wrap { padding: 0 16px; } .leaves { grid-template-columns: 1fr; margin-left: 4px; } .gen-box { padding: 20px; } }
+    @media print { nav.toc, .tools, .chips, .btn, .gap-check { display: none !important; } body { background: white; } }
   </style>
 </head>
 <body>
+  <a class="skip" href="#explore">Skip to the checklist</a>
   <header>
     <div class="wrap" style="position: relative;">
-      <div style="position: absolute; right: 20px; top: 20px; opacity: 0.9;">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 0C20 11.0457 28.9543 20 40 20C28.9543 20 20 28.9543 20 40C20 28.9543 11.0457 20 0 20C11.0457 20 20 11.0457 20 0Z" fill="#FFB700"/>
-        </svg>
-      </div>
-      <div style="position: absolute; right: 120px; top: 90px; opacity: 0.9;">
-        <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 0C20 11.0457 28.9543 20 40 20C28.9543 20 20 28.9543 20 40C20 28.9543 11.0457 20 0 20C11.0457 20 20 11.0457 20 0Z" fill="#FFB700"/>
-        </svg>
-      </div>
-      <div style="position: absolute; left: -40px; top: 140px; opacity: 0.9;">
-        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 0C20 11.0457 28.9543 20 40 20C28.9543 20 20 28.9543 20 40C20 28.9543 11.0457 20 0 20C11.0457 20 20 11.0457 20 0Z" fill="#FFB700"/>
-        </svg>
-      </div>
-      
+      <svg class="spark" style="right: 20px; top: 0;" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 0C20 11.0457 28.9543 20 40 20C28.9543 20 20 28.9543 20 40C20 28.9543 11.0457 20 0 20C11.0457 20 20 11.0457 20 0Z" fill="#FFB700"/></svg>
+      <svg class="spark" style="right: 120px; top: 70px;" width="24" height="24" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 0C20 11.0457 28.9543 20 40 20C28.9543 20 20 28.9543 20 40C20 28.9543 11.0457 20 0 20C11.0457 20 20 11.0457 20 0Z" fill="#FFB700"/></svg>
       <h1>Salesforce Compliance Checklist</h1>
-      <p class="lede" style="max-width: 960px; color: #ffffff; font-size: 18px; line-height: 1.5; font-weight: 300;"><strong>How to use this checklist:</strong> Open the regulations and standards that govern your business. Review the required evidence for each control. If you cannot produce that evidence today, check the box to add it to your custom requirements summary at the bottom of the page.</p>
+      <p class="lede"><strong>How to use this checklist:</strong> Open the regulations and standards that govern your business. Review the required evidence for each control. If you cannot produce that evidence today, check the box to add it to your custom requirements summary at the bottom of the page.</p>
     </div>
   </header>
+
+  <nav class="toc" aria-label="Page sections">
+    <div class="wrap">
+      <a href="#ready">Audit-ready</a>
+      <a href="#shared">Shared Responsibility Model</a>
+      <a href="#questions">Proof questions</a>
+      <a href="#explore">Checklist</a>
+      <a href="#summary">Your summary</a>
+      <a href="#next">Next steps</a>
+      <a href="#products">Products</a>
+      <a href="#matrix">Coverage map</a>
+    </div>
+  </nav>
+
   <main>
     <div class="wrap">
-      <h2>Compliance Categories</h2>
-      
-      <div class="search-bar">
-        <input type="text" id="search" placeholder="Search standard (e.g. SOC 2, HIPAA, GDPR)..." autocomplete="off" />
-      </div>
-      
-      <div class="map" id="map"></div>
+
+      <section id="ready">
+        <h2>Compliant is not the same as audit-ready</h2>
+        <p class="sub">An examiner samples what exists, not what was intended.</p>
+        <div class="cards">
+          <div class="card"><span class="tag">Compliant</span><h3>The control is described</h3>
+            <ul><li>A policy exists</li><li>A setting is turned on</li><li>The team believes it works</li></ul></div>
+          <div class="card"><span class="tag ok">Audit-ready</span><h3>The control can be shown</h3>
+            <ul><li>Evidence covers the full audit window</li><li>Any sample can be retrieved on request</li><li>Each record names a user or an agent</li><li>Recovery has been tested, not assumed</li></ul></div>
+        </div>
+      </section>
+
+      <section id="shared">
+        <h2>The Shared Responsibility Model</h2>
+        <p class="sub">Salesforce operates the platform. Your org's configuration, retention, and evidence are yours to run.</p>
+        <div class="cards">
+          <div class="card"><span class="tag">Salesforce-operated</span>
+            <ul><li>Platform infrastructure and its availability</li><li>Independent audit reports and certifications, published on <a href="https://compliance.salesforce.com" rel="noopener">compliance.salesforce.com</a></li><li>The logging, encryption, and backup tools you can turn on</li></ul></div>
+          <div class="card"><span class="tag warn">Customer-operated</span>
+            <ul><li>Which events and fields are logged</li><li>How long logs and history are kept</li><li>Who can invoke which agent, and on which data</li><li>Backup scope and restore testing</li><li>Producing the evidence an examiner samples</li></ul></div>
+        </div>
+      </section>
+
+      <section id="questions">
+        <h2>The questions an auditor, executive leader, or security team will ask</h2>
+        <p class="sub">The same five questions appear under different names in nearly every request.</p>
+        <div class="rolo" role="group" aria-roledescription="carousel" aria-label="The five proof questions">
+          <button class="rolo-btn" id="roloPrev" type="button" aria-label="Previous question">&#8249;</button>
+          <div class="rolo-stage" id="roloStage">
+            <div class="card rcard"><span class="tag">Access</span><h3>Who accessed what?</h3><p>Which user, integration, or agent accessed which data, and where is the log?</p></div>
+            <div class="card rcard"><span class="tag">Change</span><h3>Who changed what?</h3><p>Who changed a sensitive field, when, and from what value?</p></div>
+            <div class="card rcard"><span class="tag">Recovery</span><h3>Can it be recovered?</h3><p>If data is gone, how fast is it recovered, and when was that last tested?</p></div>
+            <div class="card rcard"><span class="tag">Encryption</span><h3>What is protected?</h3><p>What is encrypted, and who holds the keys?</p></div>
+            <div class="card rcard"><span class="tag">Agents</span><h3>Who invoked which agent?</h3><p>Which user invoked which agent, on which data, and how can you prove that?</p></div>
+          </div>
+          <button class="rolo-btn" id="roloNext" type="button" aria-label="Next question">&#8250;</button>
+        </div>
+        <div class="rolo-dots" id="roloDots" aria-hidden="true"></div>
+      </section>
+
+      <section id="explore">
+        <h2>Compliance Categories</h2>
+        <p class="sub" style="max-width: none;">Open a regulation to see the evidence required and the Salesforce product that solves the gap. These are examples to prepare with, not a substitute for your auditor's requirements.</p>
+        <div class="tools">
+          <input type="search" id="search" placeholder="Search a standard or control (e.g. SOC 2, HIPAA, CC6.1)..." autocomplete="off" aria-label="Search standards and controls" />
+        </div>
+        <div class="chips" id="chips" role="group" aria-label="Filter by product"></div>
+        <div class="chips" role="group" aria-label="Expand or collapse standards">
+          <button class="chip" type="button" id="expandAll">Expand All</button>
+          <button class="chip" type="button" id="collapseAll">Collapse All</button>
+        </div>
+        <p class="count" id="count" aria-live="polite"></p>
+        <div class="map" id="map"></div>
+      </section>
+
+      <section id="summary" class="generator">
+        <div class="gen-box">
+          <h3>Compliance Requirements Summary</h3>
+          <p>Check "Add to Requirements Summary" on any requirement you cannot evidence today. Your checklist builds here, and nothing leaves your browser.</p>
+          <div id="sum-list" aria-live="polite"><p class="sum-empty">Nothing selected yet. Check requirements in the Compliance categories above.</p></div>
+        </div>
+      </section>
+
+      <section id="next">
+        <div class="cta-band">
+          <h2>Leave with an evidence pack, not a pitch</h2>
+          <p>An evidence readiness session takes the ask you are facing, tests it the way an examiner would, and names the two or three gaps that would fail it.</p>
+          <ul>
+            <li>A ranked gap list, tied to the audit, renewal, or questionnaire date</li>
+            <li>A completed inventory of the proof you have and the proof you assume</li>
+            <li>A product map for each gap, and reusable answers for questionnaires</li>
+          </ul>
+          <p><button class="btn" id="pdf-btn" type="button">Summarize Findings</button></p>
+          <div id="pdf-out" class="gen-out" style="color:#fff" role="status" hidden></div>
+        </div>
+      </section>
+
+      <section id="products">
+        <h2>Where each gap maps to a Salesforce product</h2>
+        <p class="sub">Capabilities depend on edition and license. Your account team can confirm what is available to you.</p>
+        <div class="cards" id="prodCards"></div>
+      </section>
+
+      <section id="matrix">
+        <h2>Coverage map</h2>
+        <p class="sub">Which products produce evidence for which standard. Select a dot to jump to that standard.</p>
+        <div class="matrix-wrap"><table class="matrix" id="matrixTable"></table></div>
+      </section>
+
     </div>
   </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Control references are examples to help you prepare, not legal, audit, or compliance advice. Confirm requirements with your auditor, insurer, or counsel. Product capabilities depend on edition, license, and release. Last updated November 4, 2026.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
     const standards = [
       { id: "agentforce", label: "Agentforce" },
@@ -283,44 +323,58 @@
       em: {
         product: "Event Monitoring",
         title: "Who accessed or exported what",
-        evidence: ["Logs the user, API client, and report or list-view export", "Covers login and authentication failures", "Shows which integration or agent identity accessed which objects"],
-        risk: ["A questionnaire or audit sample fails because access is a policy, not a log", "Breach scope is a guess, which widens notification cost", "Cyber insurance asks for logs you cannot produce"]
+        provides: "Records logins, API and integration access, and report runs and exports, and can alert on unusual activity. Agent activity coverage depends on your release and license.",
+        evidence: ["Logs the user, API client, and report or list-view export", "Records login and authentication activity", "Shows which integration or agent identity accessed which objects, where your release and license cover it"],
+        risk: ["A questionnaire or audit sample fails because access is a policy, not a log", "Breach scope is hard to establish, which widens notification cost", "Cyber insurance applications ask for logs you cannot produce"]
       },
       fat: {
-        product: "Shield Field Audit Trail",
+        product: "Field Audit Trail",
         title: "What changed, and who changed it",
-        evidence: ["Keeps field before-and-after past standard field history", "Records the user and timestamp on the data they sample", "Holds the history for the window the rule actually names"],
-        risk: ["The sample fails because history ended at 18 months or was never turned on", "You cannot show the prior value after a bad edit or a bad agent write", "A finding becomes a control deficiency instead of a closed sample"]
+        provides: "Keeps before-and-after field history with user and time, for longer than standard field history, on the fields you choose.",
+        evidence: ["Keeps field before-and-after values past standard field history", "Records the user and timestamp on the data they sample", "Holds the history for the window the rule actually names"],
+        risk: ["The sample fails because history ended at the standard window or was never turned on for that field", "You cannot show the prior value after a bad edit or a bad agent write", "A finding becomes a control deficiency instead of a closed sample"]
       },
       pe: {
-        product: "Shield Platform Encryption",
+        product: "Platform Encryption",
         title: "What is encrypted, and who holds the keys",
+        provides: "Encrypts the fields and files you select at rest, with options for customer-managed keys.",
         evidence: ["Encrypts the fields you name, not only the platform default", "Puts a key decision with the customer", "Gives a field list and a key owner for the questionnaire"],
-        risk: ["The follow-up to \"Salesforce encrypts\" has no field list and no key owner", "Regulated values sit in the clear for every user who can open the record", "An insurer or assessor discounts the control"]
+        risk: ["The follow-up to \"Salesforce encrypts\" has no field list and no key owner", "Regulated values sit in the clear for every user who can open the record", "An assessor may discount a control you cannot document"]
+      },
+      dd: {
+        product: "Data Detect",
+        title: "Where the sensitive data lives",
+        provides: "Scans for sensitive data, such as personal identifiers and payment data, so you know what to encrypt, monitor, and keep or delete.",
+        evidence: ["Scans for sensitive data in standard and custom objects", "Gives a list of fields and records that need protection", "Supports the data map that privacy and PCI scoping depend on"],
+        risk: ["You cannot say which fields hold regulated data", "Sensitive values sit in notes or free-text fields no one mapped", "Encryption and retention get applied to the wrong fields"]
       },
       sc: {
         product: "Security Center",
         title: "Settings match the baseline",
-        evidence: ["Checks session, password, connected-app, and guest-user settings", "Shows the same health view across orgs", "Surfaces drift between reviews"],
-        risk: ["Each org is checked by hand, and one of them has drifted", "A misconfiguration finding shows up in the customer's audit, not yours", "The insurance application answer is a sentence"]
+        provides: "Shows security settings across orgs in one view and surfaces drift from your baseline.",
+        evidence: ["Compares security settings against your baseline", "Shows the same health view across orgs", "Surfaces drift between reviews"],
+        risk: ["Each org is checked by hand, and one of them has drifted", "A misconfiguration finding shows up in the customer's audit, not yours", "The insurance application answer rests on a statement, not a report"]
       },
       br: {
         product: "Backup & Recover",
         title: "If it is gone, how fast it comes back",
-        evidence: ["Backs up tenant data separately from platform disaster recovery", "Produces a dated restore test with RPO and RTO", "Restores records a user, integration, or agent deleted"],
-        risk: ["Ransomware or a bad delete has no tested path back", "Platform disaster recovery does not return your records", "Downtime and recovery cost sit with you, and the policy will not cover an untested backup"]
+        provides: "Backs up your data and metadata and restores it, with a dated restore you can show.",
+        evidence: ["Backs up your data and metadata so you can restore records, not only platform uptime", "Produces a dated restore test with RPO and RTO", "Restores records a user, integration, or agent deleted"],
+        risk: ["Ransomware or a bad delete has no tested path back", "Platform disaster recovery does not return your records", "Downtime and recovery cost sit with you, and an untested backup is hard to defend to an insurer"]
       },
       ar: {
         product: "Archive",
         title: "Produce the record years later",
-        evidence: ["Keeps records retrievable after they leave the live org", "Holds them for a period the org itself will not", "Supports a legal hold and a scheduled deletion"],
+        provides: "Moves aged data out of the live org while keeping it retrievable, to support retention and deletion schedules.",
+        evidence: ["Keeps records retrievable after they leave the live org", "Holds them for the retention period you set", "Supports a legal hold and a scheduled deletion"],
         risk: ["A regulator, auditor, or court asks for a record you already purged", "Keeping everything in production raises both privacy risk and storage cost", "You cannot show keep-until and delete-after as two different outcomes"]
       }
     };
+    const pkeys = Object.keys(P);
 
     function leaf(key, cite, asks) {
       const base = P[key];
-      return { product: base.product, title: base.title, cite: cite, evidence: base.evidence, risk: base.risk, asks: asks };
+      return { key: key, product: base.product, title: base.title, cite: cite, evidence: base.evidence, risk: base.risk, asks: asks };
     }
 
     const branches = {
@@ -328,7 +382,8 @@
         leaf("em", "Who launched the agent?", ["Who invoked which agent, and when?", "Did it run as a user, or autonomously?", "Where is the conversation transcript?"]),
         leaf("fat", "What did the agent write?", ["Which fields did the agent change?", "What was the human's prior value before the agent overwrote it?", "Who accepted the change if it was a copilot?"]),
         leaf("br", "Can you undo a hallucination?", ["If an agent deletes a record, can you restore it?", "If an agent hallucinates a mass update, can you roll it back?", "Is the backup tested?"]),
-        leaf("pe", "Is sensitive data masked?", ["Are regulated fields encrypted so they stay out of the agent's context?", "Who owns the keys?", "Can you prove PII didn't leak into the LLM?"])
+        leaf("pe", "Is sensitive data masked?", ["Are regulated fields encrypted so they stay out of the agent's context?", "Who owns the keys?", "Can you show which regulated fields reached the model?"]),
+        leaf("dd", "Which sensitive data can an agent reach?", ["Which sensitive fields are inside the agent's reach?", "Is that list current?", "Is it part of your AI system inventory?"])
       ],
       soc1: [
         leaf("em", "SOC 1 access to financial reporting", ["Who accessed the objects that feed the financial statements?", "Which reports were run, and by whom?", "Can the financial auditor sample from a population?"]),
@@ -338,7 +393,7 @@
       soc2: [
         leaf("em", "SOC 2 CC6.1 Logical access", ["Who accessed in-scope data during the audit period?", "Which reports and exports were run?", "Can the auditor sample from a population?"]),
         leaf("fat", "SOC 2 CC7.1, CC8.1 Change", ["Who changed an in-scope field, and what was the prior value?", "Does history cover the full examination period?", "Can you show the change without reconstructing it?"]),
-        leaf("pe", "SOC 2 CC6.7 Confidentiality", ["Which fields are encrypted?", "Who holds the keys?", "Is that the customer's control, not the platform's?"]),
+        leaf("pe", "SOC 2 CC6.1, C1.1 Encryption and confidentiality", ["Which fields are encrypted?", "Who holds the keys?", "Is that the customer's control, not the platform's?"]),
         leaf("sc", "SOC 2 CC6.6, CC7.1 Drift", ["Do security settings match the control description?", "Which org drifted during the period?", "Can you show one health view?"]),
         leaf("br", "SOC 2 A1.2 Availability", ["When was the last restore test?", "What were RPO and RTO?", "Does the test cover your data, not platform uptime?"]),
         leaf("ar", "Retention in the system description", ["Can you produce a record from the window you committed to?", "Where does it live after it leaves the org?"])
@@ -359,14 +414,15 @@
         leaf("br", "CP-9, CP-10 Backup and recovery", ["Which objects are in the contingency scope?", "When was recovery last tested?", "What were the results?"])
       ],
       cis: [
-        leaf("em", "CIS 8 Account and audit log management", ["Are user and API accesses logged?", "How long are the logs kept?", "Who reviews them?"]),
-        leaf("fat", "CIS 8 Audit log of data changes", ["Are data changes logged with user and time?", "Can you show the prior value?", "Does retention match the control?"]),
-        leaf("sc", "CIS 4 Secure configuration", ["Is there a secure baseline for the tenant?", "How do you detect drift?", "Does it cover every org?"]),
-        leaf("br", "CIS 11 Data recovery", ["Is tenant data backed up separately from the platform?", "Has restore been tested?", "What is the recovery time?"])
+        leaf("em", "CIS Controls v8, Control 8 Audit log management", ["Are user and API accesses logged?", "How long are the logs kept?", "Who reviews them?"]),
+        leaf("fat", "CIS Controls v8, Control 8 Audit log of data changes", ["Are data changes logged with user and time?", "Can you show the prior value?", "Does retention match the control?"]),
+        leaf("sc", "CIS Controls v8, Control 4 Secure configuration", ["Is there a secure baseline for the tenant?", "How do you detect drift?", "Does it cover every org?"]),
+        leaf("br", "CIS Controls v8, Control 11 Data recovery", ["Is tenant data backed up separately from the platform?", "Has restore been tested?", "What is the recovery time?"])
       ],
       privacy: [
         leaf("em", "GDPR Art. 5(2), 32 and CCPA access", ["Who accessed this person's records?", "Which integration or agent saw them?", "Can you answer that for a request or a breach?"]),
         leaf("pe", "GDPR Art. 32 and state-law security", ["Which personal-data fields are encrypted?", "Who controls the keys?", "Who inside the tenant can still read them?"]),
+        leaf("dd", "GDPR Art. 30 and data mapping", ["Do you know which fields hold personal data?", "Is that map current?", "Can you find personal data in free-text fields?"]),
         leaf("ar", "GDPR Art. 5(1)(e) Storage limitation", ["What must be kept, and what must be deleted?", "Can production be deleted while a hold copy remains?", "Can you show both outcomes?"])
       ],
       "privacy-row": [
@@ -376,8 +432,9 @@
       ],
       pci: [
         leaf("em", "PCI DSS 10.2 Audit trail", ["Who accessed cardholder data?", "Were exports and list views logged?", "Can the log be reviewed daily?"]),
-        leaf("fat", "PCI DSS 10.2, 10.5 Change history", ["Who changed account data or admin settings?", "Is the change history kept at least 12 months?", "Can the assessor pull it without a project?"]),
+        leaf("fat", "PCI DSS 10.2, 10.5 Change history", ["Who changed account data or admin settings?", "Is the change history kept for the period the standard requires?", "Can the assessor pull it without a project?"]),
         leaf("pe", "PCI DSS Requirement 3", ["Where is stored account data encrypted?", "Are keys separated from the people who read the record?", "What is the field scope?"]),
+        leaf("dd", "PCI DSS scoping", ["Where does cardholder data actually live in the org?", "Is any of it in free-text or notes?", "How do you find it again?"]),
         leaf("sc", "PCI DSS 2.2 Secure configuration", ["What hardening is set on each in-scope org?", "Where has it drifted?", "Who checks it?"]),
         leaf("br", "PCI DSS incident recovery", ["How is cardholder data restored after an incident?", "When was that path tested?", "Is it your data, or the platform?"]),
         leaf("ar", "PCI DSS retention", ["How long is cardholder data kept?", "Can you delete it when the business purpose ends?", "Where does the retained copy sit?"])
@@ -385,11 +442,12 @@
       glba: [
         leaf("em", "Safeguards Rule access controls", ["Who accessed customer information?", "Which integrations can pull it?", "Can you show that for an exam?"]),
         leaf("pe", "Safeguards Rule encryption", ["Which customer-information fields are encrypted?", "Who holds the keys?", "Is encryption in the written information-security program?"]),
+        leaf("dd", "Safeguards Rule data inventory", ["Where does customer information live?", "Is the inventory current?"]),
         leaf("br", "Safeguards Rule availability", ["How do you recover customer information?", "When was restore last tested?"]),
         leaf("sc", "Safeguards Rule configuration", ["Are access and session settings monitored?", "Who reviews drift?"])
       ],
       sec: [
-        leaf("ar", "SEC 17a-4 / FINRA books and records", ["Can you produce the record for the statutory period?", "Does it survive leaving the production org?", "Can an exam pull it without a restore?"]),
+        leaf("ar", "SEC 17a-4 / FINRA books and records", ["Can you produce the record for the statutory period?", "Does it survive leaving the production org?", "Does the retention format meet the rule? Confirm with your compliance team."]),
         leaf("fat", "Record of alteration", ["Who altered a books-and-records field?", "What was the prior value?", "Is that history retained with the record?"])
       ],
       sox: [
@@ -411,6 +469,7 @@
         leaf("em", "164.312(b) Audit controls", ["Who accessed ePHI?", "Which integration or agent saw it?", "Can privacy investigate an impermissible use?"]),
         leaf("fat", "164.312(c) Integrity", ["Who changed a clinical or billing field?", "What was the prior value?", "Can you support an amendment?"]),
         leaf("pe", "164.312(a)(2)(iv) Encryption", ["Which ePHI fields are encrypted?", "Who can use the keys?", "Is the addressable specification documented?"]),
+        leaf("dd", "Risk analysis and data location", ["Where does ePHI live in the org?", "Is any of it in notes or attachments?", "Does the risk analysis reflect that?"]),
         leaf("br", "164.308(a)(7) Contingency plan", ["Is ePHI in the backup scope?", "When was restore tested?", "Can you recover one deleted record?"]),
         leaf("ar", "164.530(j) Six-year retention", ["Can you retrieve required documentation for six years?", "Does it survive a cleanup of the live org?"])
       ],
@@ -420,17 +479,18 @@
         leaf("ar", "Retention of education records", ["How long is the record kept?", "Can you produce it after the student leaves?", "Can you delete it when the rule allows?"])
       ],
       fedramp: [
-        leaf("em", "FedRAMP / FISMA AU, AC on the tenant", ["Who accessed federal data in the org?", "Is that log the customer's, separate from Salesforce's ATO?", "Can you export it for the agency?"]),
-        leaf("sc", "CM configuration of the tenant", ["Does the tenant match the agency baseline?", "Who monitors drift?", "Salesforce's authorization does not configure your org."]),
+        leaf("em", "FedRAMP / FISMA AU, AC on the tenant", ["Who accessed federal data in the org?", "Is that log the customer's, separate from the platform authorization?", "Can you export it for the agency?"]),
+        leaf("sc", "CM configuration of the tenant", ["Does the tenant match the agency baseline?", "Who monitors drift?", "Who configures the tenant, given the platform authorization does not?"]),
         leaf("br", "CP contingency for tenant data", ["How is agency data restored?", "When was it tested?", "Is the backup inside the customer's boundary?"])
       ],
       ai: [
-        leaf("em", "EU AI Act logging and ISO 42001", ["Which user invoked which agent?", "Which records did the agent read?", "Can you show that for a high-risk use?"]),
+        leaf("em", "EU AI Act Art. 12 logging and ISO 42001", ["Which user invoked which agent?", "Which records did the agent read?", "Can you show that for a high-risk use?"]),
         leaf("fat", "Human oversight of agent writes", ["Which fields did the agent change?", "What was the prior value?", "Who accepted the change?"]),
-        leaf("pe", "Data exposed to the model", ["Are the fields in the agent's context encrypted?", "Who can still read them?", "Is that in the AI system inventory?"])
+        leaf("pe", "Data exposed to the model", ["Are the fields in the agent's context encrypted?", "Who can still read them?", "Is that in the AI system inventory?"]),
+        leaf("dd", "AI system inventory and data mapping", ["Which sensitive fields can an agent reach?", "Is that list current?"])
       ],
       ins: [
-        leaf("em", "Application and SIG / CAIQ logging questions", ["Do you have 90 or more days of tenant access logs?", "Can you attribute access to a user or integration?", "A policy PDF is not a log."]),
+        leaf("em", "Application and SIG / CAIQ logging questions", ["How many days of tenant access logs can you produce?", "Can you attribute access to a user or integration?", "Can you show a log, not a policy document?"]),
         leaf("sc", "Misconfiguration question", ["How do you monitor SaaS misconfiguration?", "What is in scope?", "What is the current result?"]),
         leaf("br", "Ransomware question", ["Is the backup separate from the data an attacker can delete?", "When was restore tested?", "What is the recovery time?"]),
         leaf("pe", "Data-at-rest question", ["Which fields are encrypted?", "Who owns the keys?", "Is that more than the platform default?"])
@@ -447,135 +507,324 @@
       { label: "Insurance and Customer Questionnaires", ids: ["ins"] }
     ];
 
-    const map = document.getElementById("map");
     const byId = Object.fromEntries(standards.map((s) => [s.id, s]));
-
-    function bullets(parent, items) {
-      items.forEach((text) => {
-        const li = document.createElement("li");
-        li.textContent = text;
-        parent.appendChild(li);
-      });
-    }
+    const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
+    const bullets = (parent, items) => items.forEach((t) => parent.appendChild(el("li", null, t)));
+    const map = document.getElementById("map");
+    const state = { q: "", product: null };
+    const stdEls = {};
+    let boxId = 0;
 
     groups.forEach((group) => {
-      const details = document.createElement("details");
-      details.className = "group";
+      const details = el("details", "group");
       details.open = true;
-      const summary = document.createElement("summary");
-      summary.innerHTML = '<span class="dot"></span>' + group.label;
+      const summary = el("summary");
+      summary.appendChild(el("span", "dot"));
+      summary.appendChild(document.createTextNode(group.label));
       details.appendChild(summary);
-      const limbs = document.createElement("div");
-      limbs.className = "limbs";
+      const limbs = el("div", "limbs");
       group.ids.forEach((id) => {
-        const std = document.createElement("details");
-        std.className = "std";
-        const sum = document.createElement("summary");
-        sum.textContent = byId[id].label;
+        const std = el("details", "std");
+        std.id = "std-" + id;
+        const sum = el("summary");
+        sum.appendChild(el("span", "lbl", byId[id].label));
+        const n = el("span", "n");
+        sum.appendChild(n);
         std.appendChild(sum);
-        const row = document.createElement("div");
-        row.className = "row";
-        const leaves = document.createElement("div");
-        leaves.className = "leaves";
-        branches[id].forEach((item) => {
-          const leafEl = document.createElement("article");
-          leafEl.className = "leaf";
-          leafEl.innerHTML = '<div><div class="product"></div></div><h3></h3><p class="cite"></p><p class="why">Why this is the evidence</p><ul class="ev"></ul><p class="risk">Your risk</p><ul class="rk"></ul><div class="how"><span>Example of Required Evidence</span><ol></ol></div><label class="gap-check"><input type="checkbox" class="gap-box" /> Add to Requirements Summary</label>';
-          leafEl.querySelector(".product").textContent = item.product;
-          leafEl.querySelector("h3").textContent = item.title;
-          leafEl.querySelector(".cite").textContent = item.cite;
-          bullets(leafEl.querySelector(".ev"), item.evidence);
-          bullets(leafEl.querySelector(".rk"), item.risk);
-          bullets(leafEl.querySelector("ol"), item.asks);
-          leaves.appendChild(leafEl);
+        const leaves = el("div", "leaves");
+        const leafEls = branches[id].map((item) => {
+          const lf = el("article", "leaf");
+          lf.appendChild(el("div", "product", item.product));
+          lf.appendChild(el("h3", null, item.title));
+          lf.appendChild(el("p", "cite", item.cite));
+          const how = el("div", "how");
+          how.appendChild(el("span", null, "Example of Required Evidence"));
+          const ol = el("ol"); bullets(ol, item.asks); how.appendChild(ol);
+          lf.appendChild(how);
+          const more = el("details", "more");
+          more.appendChild(el("summary", null, "Why this is the evidence, and the risk"));
+          more.appendChild(el("p", "lab", "Why this is the evidence"));
+          const ev = el("ul", "ev"); bullets(ev, item.evidence); more.appendChild(ev);
+          more.appendChild(el("p", "lab risk", "If you cannot show it"));
+          const rk = el("ul", "rk"); bullets(rk, item.risk); more.appendChild(rk);
+          lf.appendChild(more);
+          const label = el("label", "gap-check");
+          const cb = el("input", "gap-box"); cb.type = "checkbox"; cb.id = "gap-" + (boxId++);
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode("Add to Requirements Summary"));
+          lf.appendChild(label);
+          leaves.appendChild(lf);
+          return { lf, item };
         });
-        const next = document.createElement("button");
-        next.type = "button";
-        next.className = "next";
-        next.textContent = "→";
-        next.setAttribute("aria-label", "Scroll right");
-        next.addEventListener("click", () => leaves.scrollBy({ left: 440, behavior: "smooth" }));
-        row.appendChild(leaves);
-        row.appendChild(next);
-        requestAnimationFrame(() => {
-          if (leaves.scrollWidth <= leaves.clientWidth + 8) next.remove();
-        });
-        std.appendChild(row);
+        std.appendChild(leaves);
         limbs.appendChild(std);
+        stdEls[id] = { std, n, leafEls, group: details };
       });
       details.appendChild(limbs);
       map.appendChild(details);
     });
-    
-    // Search behavior
+
+    /* product filter chips */
+    const chipsEl = document.getElementById("chips");
+    const chipBtns = [];
+    function setProduct(key) {
+      state.product = key;
+      chipBtns.forEach((c) => c.b.setAttribute("aria-pressed", String(c.key === key)));
+      apply();
+    }
+    function mkChip(label, key) {
+      const b = el("button", "chip", label); b.type = "button";
+      b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", () => setProduct(state.product === key ? null : key));
+      chipBtns.push({ b, key }); chipsEl.appendChild(b);
+    }
+    const SHIELD_BUNDLE = ["em", "fat", "pe", "dd"];
+    mkChip("Shield Bundle", "shield");
+    pkeys.forEach((k) => mkChip(P[k].product, k));
+
+    /* search and filter */
     const searchInput = document.getElementById("search");
-    searchInput.addEventListener("input", (e) => {
-      const q = e.target.value.toLowerCase();
-      document.querySelectorAll("details.std").forEach(std => {
-        const text = std.querySelector("summary").textContent.toLowerCase();
-        if (q === "") {
-          std.style.display = "";
-          std.open = false;
-        } else if (text.includes(q)) {
-          std.style.display = "";
-          std.open = true;
-          std.parentElement.parentElement.open = true;
-        } else {
-          std.style.display = "none";
-        }
-      });
+    searchInput.addEventListener("input", (e) => { state.q = e.target.value.trim().toLowerCase(); apply(); });
+    let allOpen = false;
+    document.getElementById("expandAll").addEventListener("click", () => {
+      allOpen = true;
+      Object.values(stdEls).forEach((s) => (s.std.open = true));
     });
-    
-    // Generator behavior
-    const generator = document.createElement("div");
-    generator.className = "generator";
-    generator.innerHTML = '<div class="gen-box"><h3>Compliance Requirements Summary</h3><textarea id="gen-preview" readonly placeholder="Check boxes above to build your summary here..."></textarea><br><button id="gen-btn">Copy Summary</button><div id="gen-out" class="gen-out" hidden></div></div>';
-    map.after(generator);
-    
-    const preview = document.getElementById("gen-preview");
-    const out = document.getElementById("gen-out");
+    document.getElementById("collapseAll").addEventListener("click", () => {
+      allOpen = false;
+      Object.values(stdEls).forEach((s) => (s.std.open = false));
+    });
+
+    function apply() {
+      const filtering = !!(state.q || state.product);
+      let shown = 0, total = 0;
+      groups.forEach((g) => {
+        let groupHas = false;
+        g.ids.forEach((id) => {
+          const s = stdEls[id];
+          const labelHit = !!state.q && byId[id].label.toLowerCase().includes(state.q);
+          let vis = 0;
+          s.leafEls.forEach(({ lf, item }) => {
+            total++;
+            const prodOk = !state.product || (state.product === "shield" ? SHIELD_BUNDLE.includes(item.key) : item.key === state.product);
+            const hay = (item.cite + " " + item.title + " " + item.product + " " + item.asks.join(" ")).toLowerCase();
+            const qOk = !state.q || labelHit || hay.includes(state.q);
+            const ok = prodOk && qOk;
+            lf.hidden = !ok;
+            if (ok) { vis++; shown++; }
+          });
+          s.std.hidden = vis === 0;
+          if (filtering) s.std.open = vis > 0;
+          else s.std.open = allOpen;
+          if (vis) groupHas = true;
+        });
+        stdEls[g.ids[0]].group.hidden = !groupHas;
+        if (filtering && groupHas) stdEls[g.ids[0]].group.open = true;
+      });
+      document.getElementById("count").textContent = filtering ? "Showing " + shown + " of " + total + " evidence areas" : "";
+    }
+    apply();
+
+    /* product cards */
+    const prodCards = document.getElementById("prodCards");
+    pkeys.forEach((k) => {
+      const p = P[k];
+      const c = el("div", "card prod");
+      c.appendChild(el("span", "tag", p.title));
+      c.appendChild(el("h3", null, p.product));
+      c.appendChild(el("p", null, p.provides));
+      c.appendChild(el("div", "lab", "If you cannot show it"));
+      c.appendChild(el("p", "risk", p.risk[0]));
+      prodCards.appendChild(c);
+    });
+
+    /* coverage matrix */
+    (function () {
+      const t = document.getElementById("matrixTable");
+      const head = el("thead"); const hr = el("tr");
+      hr.appendChild(el("th", null, "Standard"));
+      pkeys.forEach((k) => hr.appendChild(el("th", null, P[k].product.replace("Shield ", ""))));
+      head.appendChild(hr); t.appendChild(head);
+      const body = el("tbody");
+      standards.forEach((s) => {
+        const tr = el("tr");
+        const th = el("th", null, s.label); th.scope = "row"; tr.appendChild(th);
+        pkeys.forEach((k) => {
+          const td = el("td");
+          if (branches[s.id].some((i) => i.key === k)) {
+            const b = el("button", null, "✓"); b.type = "button";
+            b.setAttribute("aria-label", s.label + ": " + P[k].product + ". Show this evidence.");
+            b.addEventListener("click", () => {
+              searchInput.value = ""; state.q = "";
+              setProduct(k);
+              const target = document.getElementById("std-" + s.id);
+              target.open = true; target.scrollIntoView({ block: "center" });
+            });
+            td.appendChild(b);
+          } else {
+            const d = el("span", "none", "–"); d.setAttribute("aria-label", "not mapped"); td.appendChild(d);
+          }
+          tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      });
+      t.appendChild(body);
+    })();
+
+    /* requirements summary */
+    const sumList = document.getElementById("sum-list");
 
     function updatePreview() {
       const checked = Array.from(document.querySelectorAll(".gap-box:checked"));
+      sumList.textContent = "";
       if (checked.length === 0) {
-        preview.value = "";
+        sumList.appendChild(el("p", "sum-empty", "Nothing selected yet. Check requirements in the Compliance categories above."));
         return;
       }
-      let text = "Compliance & Evidence Gap Summary\n\n";
-      checked.forEach(cb => {
-        const leaf = cb.closest(".leaf");
-        const std = leaf.closest(".std").querySelector("summary").textContent;
-        const cite = leaf.querySelector(".cite").textContent;
-        const product = leaf.querySelector(".product").textContent;
-        const title = leaf.querySelector("h3").textContent;
-        
-        text += `Standard: ${std}\n`;
-        text += `Requirement: ${cite} (${title})\n`;
-        
-        text += `Solution: ${product}\n\n`;
+      const order = [];
+      const byStd = {};
+      checked.forEach((cb) => {
+        const lf = cb.closest(".leaf");
+        const std = lf.closest(".std").querySelector(".lbl").textContent;
+        if (!byStd[std]) { byStd[std] = []; order.push(std); }
+        byStd[std].push({ cb, text: lf.querySelector(".cite").textContent + " (" + lf.querySelector(".product").textContent + ")" });
       });
-      preview.value = text;
+      order.forEach((std) => {
+        sumList.appendChild(el("h4", "sum-std", std));
+        const ul = el("ul", "sum-items");
+        byStd[std].forEach(({ cb, text }) => {
+          const li = el("li");
+          const lab = el("label");
+          const box = el("input"); box.type = "checkbox"; box.checked = true;
+          box.addEventListener("change", () => { cb.checked = false; updatePreview(); });
+          lab.appendChild(box);
+          lab.appendChild(document.createTextNode(" " + text));
+          li.appendChild(lab); ul.appendChild(li);
+        });
+        sumList.appendChild(ul);
+      });
     }
 
     map.addEventListener("change", (e) => {
-      if (e.target.classList.contains("gap-box")) {
-        updatePreview();
-        out.hidden = true;
-      }
+      if (e.target.classList.contains("gap-box")) updatePreview();
     });
-    
-    document.getElementById("gen-btn").addEventListener("click", () => {
-      if (!preview.value) {
-        out.hidden = false;
-        out.textContent = "Check at least one requirement above to generate a summary.";
-        return;
-      }
-      navigator.clipboard.writeText(preview.value).then(() => {
-        out.hidden = false;
-        out.textContent = "Copied to clipboard! Paste into Quip or email.";
-        setTimeout(() => out.hidden = true, 4000);
+
+    /* Summarize Findings: build a takeaway PDF from the checked requirements */
+    document.getElementById("pdf-btn").addEventListener("click", () => {
+      const msg = document.getElementById("pdf-out");
+      msg.hidden = false;
+      const checked = Array.from(document.querySelectorAll(".gap-box:checked"));
+      if (!checked.length) { msg.textContent = "Check at least one requirement in the Compliance categories section first, then select Summarize Findings."; return; }
+      if (!window.jspdf) { msg.textContent = "The PDF tool did not load. Check your connection and try again, or use Copy Summary above."; return; }
+
+      const clean = (s) => String(s).replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, "-").replace(/−/g, "-").replace(/[^\x20-\x7E -ÿ]/g, "");
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: "pt", format: "letter" });
+      const M = 54, W = doc.internal.pageSize.getWidth() - M * 2, H = doc.internal.pageSize.getHeight();
+      let y = M;
+      const NAVY = [3, 45, 96], BLUE = [11, 95, 255], GREY = [62, 84, 112], RED = [179, 38, 30];
+
+      const ensure = (h) => { if (y + h > H - M) { doc.addPage(); y = M; } };
+      const write = (text, size, style, color, indent, after) => {
+        doc.setFont("helvetica", style); doc.setFontSize(size); doc.setTextColor(color[0], color[1], color[2]);
+        const lines = doc.splitTextToSize(clean(text), W - indent);
+        const lh = size * 1.3;
+        lines.forEach((ln) => { ensure(lh); doc.text(ln, M + indent, y + size); y += lh; });
+        y += after;
+      };
+
+      /* group by standard, in page order */
+      const groupsOut = [];
+      const idx = {};
+      const products = {};
+      checked.forEach((cb) => {
+        const lf = cb.closest(".leaf");
+        const std = lf.closest(".std").querySelector(".lbl").textContent;
+        if (!(std in idx)) { idx[std] = groupsOut.length; groupsOut.push({ std, items: [] }); }
+        const product = lf.querySelector(".product").textContent;
+        products[product] = (products[product] || 0) + 1;
+        groupsOut[idx[std]].items.push({
+          cite: lf.querySelector(".cite").textContent,
+          title: lf.querySelector("h3").textContent,
+          product,
+          asks: Array.from(lf.querySelectorAll(".how li")).map((li) => li.textContent),
+          risk: Array.from(lf.querySelectorAll("ul.rk li")).map((li) => li.textContent)
+        });
       });
+
+      /* header band */
+      doc.setFillColor(NAVY[0], NAVY[1], NAVY[2]); doc.rect(0, 0, doc.internal.pageSize.getWidth(), 92, "F");
+      doc.setFont("helvetica", "bold"); doc.setFontSize(22); doc.setTextColor(255, 255, 255);
+      doc.text("Compliance Readiness Findings", M, 52);
+      doc.setFont("helvetica", "normal"); doc.setFontSize(11);
+      doc.text("Close the Compliance Gap  |  " + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }), M, 72);
+      y = 118;
+
+      write("Summary", 15, "bold", NAVY, 0, 4);
+      write(checked.length + " requirement" + (checked.length === 1 ? "" : "s") + " across " + groupsOut.length + " standard" + (groupsOut.length === 1 ? "" : "s") + " flagged as not evidenced today.", 11, "normal", GREY, 0, 6);
+      write("Products that produce the missing evidence: " + Object.keys(products).map((p) => p + " (" + products[p] + ")").join(", ") + ".", 11, "normal", GREY, 0, 14);
+
+      groupsOut.forEach((g) => {
+        ensure(60);
+        doc.setDrawColor(BLUE[0], BLUE[1], BLUE[2]); doc.setLineWidth(1.5); doc.line(M, y, M + W, y); y += 8;
+        write(g.std, 14, "bold", NAVY, 0, 6);
+        g.items.forEach((it) => {
+          write(it.cite + "  -  " + it.title, 11.5, "bold", BLUE, 0, 2);
+          write("Salesforce product: " + it.product, 10, "normal", GREY, 0, 4);
+          write("Be ready to answer:", 10.5, "bold", NAVY, 0, 1);
+          it.asks.forEach((a) => write("-  " + a, 10.5, "normal", NAVY, 10, 1));
+          if (it.risk.length) {
+            write("If you cannot show it:", 10.5, "bold", RED, 0, 1);
+            it.risk.forEach((r) => write("-  " + r, 10.5, "normal", NAVY, 10, 1));
+          }
+          y += 10;
+        });
+        y += 6;
+      });
+
+      write("Next step: for each item above, confirm with your auditor, insurer, or counsel what evidence is required, then confirm product capabilities for your edition and license with your Salesforce account team. Control references are examples to help you prepare, not legal, audit, or compliance advice.", 9, "normal", GREY, 0, 0);
+
+      const pages = doc.internal.getNumberOfPages();
+      for (let i = 1; i <= pages; i++) {
+        doc.setPage(i); doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(GREY[0], GREY[1], GREY[2]);
+        doc.text("Page " + i + " of " + pages, M + W, H - 28, { align: "right" });
+      }
+      doc.save("compliance-readiness-findings.pdf");
+      msg.textContent = "Your PDF is downloading. Nothing left your browser.";
     });
+
+    /* rolodex carousel for the five proof questions */
+    (function () {
+      const stage = document.getElementById("roloStage");
+      const cards = Array.from(stage.children);
+      const dotsEl = document.getElementById("roloDots");
+      const n = cards.length;
+      let cur = 0;
+      const dots = cards.map(() => { const d = document.createElement("i"); dotsEl.appendChild(d); return d; });
+      function render() {
+        cards.forEach((c, i) => {
+          let o = (((i - cur) % n) + n) % n;
+          if (o > n / 2) o -= n;
+          const a = Math.abs(o);
+          c.style.transform = "translateX(" + (o * 106) + "%) scale(" + (o === 0 ? 1 : 0.86) + ") rotateY(" + (-o * 16) + "deg)";
+          c.style.opacity = a === 0 ? 1 : a === 1 ? 0.6 : 0;
+          c.style.zIndex = 10 - a;
+          c.style.pointerEvents = a > 1 ? "none" : "auto";
+          c.setAttribute("aria-hidden", a === 0 ? "false" : "true");
+          c.classList.toggle("active", a === 0);
+        });
+        dots.forEach((d, i) => d.classList.toggle("on", i === cur));
+      }
+      const go = (step) => { cur = (cur + step + n) % n; render(); };
+      document.getElementById("roloPrev").addEventListener("click", () => go(-1));
+      document.getElementById("roloNext").addEventListener("click", () => go(1));
+      cards.forEach((c, i) => c.addEventListener("click", () => { cur = i; render(); }));
+      stage.parentElement.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") go(-1);
+        if (e.key === "ArrowRight") go(1);
+      });
+      render();
+    })();
 
   </script>
 </body>
