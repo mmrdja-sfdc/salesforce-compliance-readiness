@@ -82,6 +82,33 @@
     .rolo-dots i { width: 10px; height: 10px; border-radius: 50%; background: #9ec9f5; transition: background .2s, transform .2s; }
     .rolo-dots i.on { background: var(--bright); transform: scale(1.25); }
     @media (max-width: 760px) { .rcard { left: 4%; width: 92%; } .rolo-stage { height: 290px; } .rolo-btn { width: 40px; height: 40px; font-size: 26px; } }
+    .lcwrap { display: grid; grid-template-columns: minmax(280px, 430px) 1fr; gap: 28px; align-items: center; }
+    .lcwheel { width: 100%; height: auto; max-width: 430px; margin: 0 auto; display: block; }
+    .lcwheel .seg { cursor: pointer; outline: none; }
+    .lcwheel .seg path { fill: #ffffff; stroke: #9ec9f5; stroke-width: 2; transition: fill .2s; filter: drop-shadow(0 4px 8px rgba(3,45,96,.12)); }
+    .lcwheel .seg:hover path { fill: var(--accent-soft); }
+    .lcwheel .seg text { fill: var(--ink); font-weight: 800; font-size: 14px; pointer-events: none; text-anchor: middle; }
+    .lcwheel .seg .num { font-size: 20px; }
+    .lcwheel .seg.on path { fill: var(--bright); stroke: var(--bright); }
+    .lcwheel .seg.on text { fill: #fff; }
+    .lcwheel .seg:focus-visible path { stroke: #ffb700; stroke-width: 4; }
+    .lcwheel .hubseg { cursor: pointer; outline: none; }
+    .lcwheel .hubseg circle { fill: var(--ink); stroke: #9ec9f5; stroke-width: 2; transition: fill .2s; }
+    .lcwheel .hubseg:hover circle { fill: var(--deep); }
+    .lcwheel .hubseg.on circle { fill: var(--bright); stroke: var(--bright); }
+    .lcwheel .hubseg text { fill: #fff; font-weight: 800; font-size: 20px; text-anchor: middle; pointer-events: none; }
+    .lcwheel .hubseg:focus-visible circle { stroke: #ffb700; stroke-width: 4; }
+    .lcpanel { background: white; border-radius: 22px; padding: 26px 30px; box-shadow: var(--shadow); }
+    .lcpanel h3 { font-size: 26px; margin: 4px 0 4px; }
+    .lcpanel h4 { margin: 18px 0 6px; font-size: 14px; letter-spacing: .02em; text-transform: uppercase; color: var(--bright); }
+    .lcpanel h4.q { color: var(--warn); }
+    .lcpanel ul { margin: 0; padding-left: 20px; }
+    .lcpanel li, .lcpanel p { font-size: 16px; margin: 0 0 6px; }
+    .lcpanel .qtext { font-weight: 700; }
+    .lcpills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .lcpills button { border: 0; font: inherit; font-size: 14px; font-weight: 700; background: var(--accent-soft); color: var(--bright); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+    .lcpills button:hover { background: var(--bright); color: #fff; }
+    @media (max-width: 800px) { .lcwrap { grid-template-columns: 1fr; } }
     .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; counter-reset: step; }
     .step { background: white; border-radius: 22px; padding: 20px; box-shadow: var(--shadow); }
     .step::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--deep); color: white; font-weight: 800; margin-bottom: 10px; }
@@ -102,6 +129,7 @@
     .tools input[type=search]:focus { border-color: var(--bright); outline-offset: 0; }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
     button.chip { border: 0; background: white; color: var(--ink); border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 10px rgba(3,45,96,.08); }
+    button.chip.bundled { background: #cfe6ff; color: var(--ink); box-shadow: 0 0 0 2px #7fb6f5; }
     button.chip[aria-pressed="true"] { background: var(--bright); color: white; }
     .count { font-size: 14px; margin: 0 0 10px; min-height: 21px; }
 
@@ -142,6 +170,15 @@
     .gen-box h3 { margin: 0 0 8px; font-size: 24px; }
     .gen-box p { margin: 0 0 16px; font-size: 15px; color: var(--soft-text); }
     .sum-empty { font-style: italic; margin: 0; }
+    .cta-band .sum-note { font-size: 14px; opacity: .85; margin-top: 14px; }
+    .cta-band .sum-empty { color: var(--soft-text); }
+    .cta-band .sum-std { color: var(--ink); }
+    .cta-band .sum-std:first-child { margin-top: 0; }
+    .cta-band .sum-items li { color: var(--ink); }
+    .cta-band .sum-items input { accent-color: var(--bright); }
+    .cta-band #sum-list { max-width: none; margin: 14px 0 18px; background: #fff; color: var(--ink); border-radius: 18px; padding: 20px 24px; box-shadow: var(--shadow); }
+    #summary .cta-band p, #summary .cta-band li { max-width: none; }
+    .cta-band .btn { margin-top: 6px; }
     .sum-std { margin: 18px 0 6px; font-size: 17px; color: var(--ink); }
     .sum-items { list-style: none; margin: 0; padding: 0; }
     .sum-items li { margin: 0 0 6px; font-size: 15px; }
@@ -158,6 +195,19 @@
     .matrix button:hover { background: var(--deep); }
     .matrix .none { color: #7a8ea8; }
 
+    .prodsplit { display: grid; grid-template-columns: minmax(200px, 280px) 1fr; gap: 20px; align-items: start; }
+    .prodlist { display: flex; flex-direction: column; gap: 8px; }
+    .prodbtn { text-align: left; border: 0; background: white; color: var(--ink); font: inherit; font-weight: 800; font-size: 16px; padding: 14px 18px; border-radius: 14px; cursor: pointer; box-shadow: 0 4px 10px rgba(3,45,96,.08); }
+    .prodbtn:hover { background: var(--accent-soft); }
+    .prodbtn[aria-selected="true"] { background: var(--bright); color: white; }
+    .prodpanel { background: white; border-radius: 22px; padding: 26px 30px; box-shadow: var(--shadow); min-height: 100%; }
+    .prodpanel h3 { font-size: 26px; margin: 0 0 4px; }
+    .prodpanel p, .prodpanel li { font-size: 16px; }
+    .prodpanel ul { margin: 6px 0 0; padding-left: 20px; }
+    .prodpanel li { margin-bottom: 6px; }
+    .pp-lab { margin: 20px 0 6px; font-size: 14px; letter-spacing: .02em; text-transform: uppercase; color: var(--bright); }
+    .pp-lab.risk { color: var(--warn); }
+    @media (max-width: 760px) { .prodsplit { grid-template-columns: 1fr; } }
     .prod .lab { font-size: 13px; font-weight: 800; margin: 12px 0 2px; }
     .prod .risk { color: var(--warn); }
 
@@ -189,11 +239,11 @@
       <a href="#ready">Audit-ready</a>
       <a href="#shared">Shared Responsibility Model</a>
       <a href="#questions">Proof questions</a>
+      <a href="#ai-readiness">AI readiness</a>
       <a href="#explore">Checklist</a>
       <a href="#summary">Your summary</a>
-      <a href="#next">Next steps</a>
       <a href="#products">Products</a>
-      <a href="#matrix">Coverage map</a>
+      <a href="#matrix">Coverage Map</a>
     </div>
   </nav>
 
@@ -202,10 +252,10 @@
 
       <section id="ready">
         <h2>Compliant is not the same as audit-ready</h2>
-        <p class="sub">An examiner samples what exists, not what was intended.</p>
+        <p class="sub">A policy says what should happen. Evidence shows what did.</p>
         <div class="cards">
           <div class="card"><span class="tag">Compliant</span><h3>The control is described</h3>
-            <ul><li>A policy exists</li><li>A setting is turned on</li><li>The team believes it works</li></ul></div>
+            <ul><li>An internal policy exists and is enforced</li><li>A setting is turned on</li><li>The team says the controls are in place</li></ul></div>
           <div class="card"><span class="tag ok">Audit-ready</span><h3>The control can be shown</h3>
             <ul><li>Evidence covers the full audit window</li><li>Any sample can be retrieved on request</li><li>Each record names a user or an agent</li><li>Recovery has been tested, not assumed</li></ul></div>
         </div>
@@ -213,12 +263,12 @@
 
       <section id="shared">
         <h2>The Shared Responsibility Model</h2>
-        <p class="sub">Salesforce operates the platform. Your org's configuration, retention, and evidence are yours to run.</p>
+        <p class="sub" style="max-width: none;">Protecting data is a partnership. Salesforce provides the guardrails and controls, you as the customer provide the configuration.</p>
         <div class="cards">
           <div class="card"><span class="tag">Salesforce-operated</span>
-            <ul><li>Platform infrastructure and its availability</li><li>Independent audit reports and certifications, published on <a href="https://compliance.salesforce.com" rel="noopener">compliance.salesforce.com</a></li><li>The logging, encryption, and backup tools you can turn on</li></ul></div>
+            <ul><li>Delivers reliable access to the platform</li><li>Independent audit reports and certifications, published on <a href="https://compliance.salesforce.com" rel="noopener">compliance.salesforce.com</a></li><li>Prepares customers for evolving threats and helps them build secure solutions</li></ul></div>
           <div class="card"><span class="tag warn">Customer-operated</span>
-            <ul><li>Which events and fields are logged</li><li>How long logs and history are kept</li><li>Who can invoke which agent, and on which data</li><li>Backup scope and restore testing</li><li>Producing the evidence an examiner samples</li></ul></div>
+            <ul><li>Implement security controls provided on the platform</li><li>Configure the Principle of Least Privilege for user permissions</li><li>Ensure data integrity and resilience for business continuity</li></ul></div>
         </div>
       </section>
 
@@ -239,9 +289,18 @@
         <div class="rolo-dots" id="roloDots" aria-hidden="true"></div>
       </section>
 
+      <section id="ai-readiness">
+        <h2>AI Readiness: Common Challenges Across the Agent Lifecycle</h2>
+        <p class="sub" style="max-width: none;">Agents move through five stages, with governance running across all of them. Customers tend to hit the same proof gaps at each stage. Select a stage on the wheel to see the common challenges, the risk involved, and the Salesforce products that help.</p>
+        <div class="lcwrap">
+          <svg id="lcWheel" class="lcwheel" viewBox="0 0 400 400" role="group" aria-label="The agent lifecycle: five stages"></svg>
+          <div class="lcpanel" id="lcPanel" aria-live="polite"></div>
+        </div>
+      </section>
+
       <section id="explore">
         <h2>Compliance Categories</h2>
-        <p class="sub" style="max-width: none;">Open a regulation to see the evidence required and the Salesforce product that solves the gap. These are examples to prepare with, not a substitute for your auditor's requirements.</p>
+        <p class="sub" style="max-width: none;">Open a regulation to see the evidence required and the Salesforce product that solves the gap. These are examples to prepare with, not a substitute for your auditor's requirements. Check the box on any requirement you cannot evidence today to add it to your Compliance Requirements Summary below.</p>
         <div class="tools">
           <input type="search" id="search" placeholder="Search a standard or control (e.g. SOC 2, HIPAA, CC6.1)..." autocomplete="off" aria-label="Search standards and controls" />
         </div>
@@ -255,35 +314,26 @@
       </section>
 
       <section id="summary" class="generator">
-        <div class="gen-box">
-          <h3>Compliance Requirements Summary</h3>
-          <p>Check "Add to Requirements Summary" on any requirement you cannot evidence today. Your checklist builds here, and nothing leaves your browser.</p>
-          <div id="sum-list" aria-live="polite"><p class="sum-empty">Nothing selected yet. Check requirements in the Compliance categories above.</p></div>
-        </div>
-      </section>
-
-      <section id="next">
         <div class="cta-band">
-          <h2>Leave with an evidence pack, not a pitch</h2>
-          <p>An evidence readiness session takes the ask you are facing, tests it the way an examiner would, and names the two or three gaps that would fail it.</p>
-          <ul>
-            <li>A ranked gap list, tied to the audit, renewal, or questionnaire date</li>
-            <li>A completed inventory of the proof you have and the proof you assume</li>
-            <li>A product map for each gap, and reusable answers for questionnaires</li>
-          </ul>
-          <p><button class="btn" id="pdf-btn" type="button">Summarize Findings</button></p>
+          <h2>Compliance Requirements Summary</h2>
+          <p>This summary compiles every requirement you flagged above as not evidenced today. It groups them by regulation or standard, names the Salesforce product that closes each gap, and carries the questions to be ready to answer and the risk of not being able to show them. Export it as a PDF to share with your auditor, security team, or Salesforce account team.</p>
+          <p class="sum-note">Check "Add to Compliance Requirements Summary" on any requirement above. Your checklist builds here, and nothing leaves your browser.</p>
+          <div id="sum-list" aria-live="polite"><p class="sum-empty">Nothing selected yet. Check requirements in the Compliance Categories above.</p></div>
+          <p><button class="btn" id="pdf-btn" type="button">Export Summary Findings</button></p>
           <div id="pdf-out" class="gen-out" style="color:#fff" role="status" hidden></div>
         </div>
       </section>
 
       <section id="products">
-        <h2>Where each gap maps to a Salesforce product</h2>
-        <p class="sub">Capabilities depend on edition and license. Your account team can confirm what is available to you.</p>
-        <div class="cards" id="prodCards"></div>
+        <h2>Where Salesforce security enhancements provide value</h2>
+        <div class="prodsplit">
+          <div class="prodlist" id="prodList" role="tablist" aria-label="Salesforce products" aria-orientation="vertical"></div>
+          <div class="prodpanel" id="prodPanel" role="tabpanel" aria-live="polite"></div>
+        </div>
       </section>
 
       <section id="matrix">
-        <h2>Coverage map</h2>
+        <h2>Coverage Map</h2>
         <p class="sub">Which products produce evidence for which standard. Select a dot to jump to that standard.</p>
         <div class="matrix-wrap"><table class="matrix" id="matrixTable"></table></div>
       </section>
@@ -293,7 +343,7 @@
 
   <footer>
     <div class="wrap">
-      <p>Control references are examples to help you prepare, not legal, audit, or compliance advice. Confirm requirements with your auditor, insurer, or counsel. Product capabilities depend on edition, license, and release. Last updated November 4, 2026.</p>
+      <p>Control references are examples to help you prepare, not legal, audit, or compliance advice. Confirm requirements with your auditor, insurer, or counsel. Product capabilities depend on edition, license, and release. Last updated November 6, 2026.</p>
     </div>
   </footer>
 
@@ -325,51 +375,66 @@
       em: {
         product: "Event Monitoring",
         title: "Who accessed or exported what",
-        provides: "Records logins, API and integration access, and report runs and exports, and can alert on unusual activity. Agent activity coverage depends on your release and license.",
+        provides: "Includes 90+ logs tracking key platform events, showing who accessed or changed your data, when, and from where. Lets you set security policies that detect and block high-risk activity, and stream security events to your SIEM.",
         evidence: ["Logs the user, API client, and report or list-view export", "Records login and authentication activity", "Shows which integration or agent identity accessed which objects, where your release and license cover it"],
         risk: ["A questionnaire or audit sample fails because access is a policy, not a log", "Breach scope is hard to establish, which widens notification cost", "Cyber insurance applications ask for logs you cannot produce"]
       },
       fat: {
         product: "Field Audit Trail",
         title: "What changed, and who changed it",
-        provides: "Keeps before-and-after field history with user and time, for longer than standard field history, on the fields you choose.",
+        provides: "Tracks changes to the fields you choose, showing who changed them, when, and what changed, for up to 200 fields per object. Keeps that history for a set period or indefinitely to meet internal and industry rules.",
         evidence: ["Keeps field before-and-after values past standard field history", "Records the user and timestamp on the data they sample", "Holds the history for the window the rule actually names"],
         risk: ["The sample fails because history ended at the standard window or was never turned on for that field", "You cannot show the prior value after a bad edit or a bad agent write", "A finding becomes a control deficiency instead of a closed sample"]
       },
       pe: {
         product: "Platform Encryption",
         title: "What is encrypted, and who holds the keys",
-        provides: "Encrypts the fields and files you select at rest, with options for customer-managed keys.",
+        provides: "Encrypts sensitive data at rest with 256-bit AES while keeping core business functionality working. Lets you manage your own encryption keys, with bring-your-own-key (BYOK) and external key management (EKM) options.",
         evidence: ["Encrypts the fields you name, not only the platform default", "Puts a key decision with the customer", "Gives a field list and a key owner for the questionnaire"],
         risk: ["The follow-up to \"Salesforce encrypts\" has no field list and no key owner", "Regulated values sit in the clear for every user who can open the record", "An assessor may discount a control you cannot document"]
       },
       dd: {
         product: "Data Detect",
         title: "Where the sensitive data lives",
-        provides: "Scans for sensitive data, such as personal identifiers and payment data, so you know what to encrypt, monitor, and keep or delete.",
+        provides: "Finds sensitive data, both predefined types such as SSNs and credit card numbers and custom ones, across millions of records. The results can guide further protections such as encryption and transaction security policies.",
         evidence: ["Scans for sensitive data in standard and custom objects", "Gives a list of fields and records that need protection", "Supports the data map that privacy and PCI scoping depend on"],
         risk: ["You cannot say which fields hold regulated data", "Sensitive values sit in notes or free-text fields no one mapped", "Encryption and retention get applied to the wrong fields"]
       },
       sc: {
         product: "Security Center",
         title: "Settings match the baseline",
-        provides: "Shows security settings across orgs in one view and surfaces drift from your baseline.",
+        provides: "Gives you a single view of your security posture across orgs, including logins, permissions, connected apps, and configuration changes. Lets you set certain security policies once and deploy them to every connected org.",
         evidence: ["Compares security settings against your baseline", "Shows the same health view across orgs", "Surfaces drift between reviews"],
         risk: ["Each org is checked by hand, and one of them has drifted", "A misconfiguration finding shows up in the customer's audit, not yours", "The insurance application answer rests on a statement, not a report"]
       },
       br: {
         product: "Backup & Recover",
         title: "If it is gone, how fast it comes back",
-        provides: "Backs up your data and metadata and restores it, with a dated restore you can show.",
-        evidence: ["Backs up your data and metadata so you can restore records, not only platform uptime", "Produces a dated restore test with RPO and RTO", "Restores records a user, integration, or agent deleted"],
+        provides: "Runs automated backups of your Salesforce data, stored separately from your org. Lets you restore only the affected objects, records, or fields so valid changes are not lost, and alerts you to unusual data activity.",
+        evidence: ["Backs up your data and metadata so you can restore records, not only platform uptime", "Produces a dated restore test with RPO and RTO", "Restores records a user, integration, or agent deleted", "Supports AI deployment with a recovery path: if an agent mass-deletes or mass-updates records, you can restore just the affected data without losing valid changes"],
         risk: ["Ransomware or a bad delete has no tested path back", "Platform disaster recovery does not return your records", "Downtime and recovery cost sit with you, and an untested backup is hard to defend to an insurer"]
       },
       ar: {
         product: "Archive",
         title: "Produce the record years later",
-        provides: "Moves aged data out of the live org while keeping it retrievable, to support retention and deletion schedules.",
+        provides: "Moves inactive records, files, and attachments out of your live org on automated policies, so the org runs faster and uses less storage. Archived data stays viewable from inside Salesforce, with custom retention, legal hold, and purge policies.",
         evidence: ["Keeps records retrievable after they leave the live org", "Holds them for the retention period you set", "Supports a legal hold and a scheduled deletion"],
         risk: ["A regulator, auditor, or court asks for a record you already purged", "Keeping everything in production raises both privacy risk and storage cost", "You cannot show keep-until and delete-after as two different outcomes"]
+      }
+      ,
+      dms: {
+        product: "Data Mask & Seed",
+        title: "Safe data in non-production",
+        provides: "Masks sensitive data in your sandboxes and seeds them with realistic or synthetic test data, so teams can build and test without exposing real customer information. Masking can run on a schedule or right after a sandbox refresh.",
+        evidence: ["Masks sensitive fields in sandbox copies using rules you define", "Seeds sandboxes with a filtered subset of production data and its relationships", "Leaves a configured, repeatable job you can show"],
+        risk: ["Real customer data sits in sandboxes with broader access than production", "Developers and agent builders test against live personal data", "A sandbox exposure becomes a reportable incident"]
+      },
+      pc: {
+        product: "Privacy Center",
+        title: "Honor rights requests and retention",
+        provides: "Automates privacy management in Salesforce without code, with policies to anonymize, delete, or retain data and automated Right to be Forgotten and data subject access requests. Also captures customer consent preferences through low-code forms.",
+        evidence: ["Applies retention and deletion policies you define to your records", "Supports data subject access and erasure requests", "Works with consent records to show what a customer agreed to"],
+        risk: ["A rights request is answered by hand, late, or incompletely", "Data is kept past the period you committed to", "You cannot show what a person consented to"]
       }
     };
     const pkeys = Object.keys(P);
@@ -499,6 +564,905 @@
       ]
     };
 
+    /* new product tiles */
+    branches.agentforce.push(leaf("dms", "Is test data safe for building agents?", ["Are agents built and tested on masked sandbox data?", "Which sandboxes hold copies of real customer data?", "Can you show the masking job and when it last ran?"]));
+    branches.soc2.push(leaf("dms", "SOC 2 C1.1, CC6.1 Confidentiality in non-production", ["Does non-production hold real customer data?", "Is it masked after each sandbox refresh?", "Can you show the masking run for the period?"]));
+    branches.privacy.push(leaf("dms", "GDPR Art. 5(1)(c), 25 Data minimisation in test environments", ["Do developers and testers work with real personal data?", "Is personal data masked or removed in sandboxes?", "Can you show the job and its scope?"]));
+    branches.privacy.push(leaf("pc", "GDPR Art. 15, 17 and CCPA Rights requests and retention", ["Can you find and return or erase one person's data on request?", "How do you apply retention and deletion schedules?", "Can you show consent and what it covers?"]));
+    branches["privacy-row"].push(leaf("pc", "PIPEDA, LGPD, APPI, Australian Privacy Act Rights requests", ["Can you support access, correction, and deletion requests?", "How long is personal information kept before deletion?", "Where is consent recorded?"]));
+    branches.pci.push(leaf("dms", "PCI DSS 6.5.5 Live data in pre-production", ["Is any live cardholder data in sandboxes?", "Are test accounts and data masked or removed?", "Can an assessor see the masking policy?"]));
+    branches.hipaa.push(leaf("dms", "Risk analysis: ePHI in non-production", ["Does ePHI exist in sandboxes?", "Is it masked before developers or testers see it?", "Does the risk analysis cover non-production?"]));
+    branches.glba.push(leaf("dms", "Safeguards Rule development and test data", ["Does customer information sit in test environments?", "Is it masked?", "Is that in the written program?"]));
+    branches.ai.push(leaf("dms", "Data used to build and test agents", ["What data do agents see during build and test?", "Is it masked?", "Can you show how test data differs from production?"]));
+
+    /* per-standard "why this is the evidence" and "if you cannot show it" */
+    const detail = {
+ "agentforce/em": {
+  "ev": [
+   "Records which user or integration identity accessed which objects, where your release and license cover agent activity",
+   "Gives an exportable log instead of a verbal answer"
+  ],
+  "rk": [
+   "You cannot show who launched an agent or which data it touched",
+   "An incident review has no record to reconstruct the agent's access"
+  ]
+ },
+ "agentforce/fat": {
+  "ev": [
+   "Keeps the prior value, user, and time on the fields you track",
+   "Lets you separate human edits from agent writes on those fields"
+  ],
+  "rk": [
+   "A bad agent write cannot be traced back to the prior value",
+   "You cannot show who accepted or approved an agent's change"
+  ]
+ },
+ "agentforce/br": {
+  "ev": [
+   "Holds point-in-time copies of your data to restore from",
+   "A documented restore test shows a mass agent update can be reversed"
+  ],
+  "rk": [
+   "A mass delete or update by an agent has no tested way back",
+   "Recovery depends on manual rework nobody has rehearsed"
+  ]
+ },
+ "agentforce/pe": {
+  "ev": [
+   "Encrypts the fields you select at rest under keys you control",
+   "Gives a field list and a key owner to answer what is protected"
+  ],
+  "rk": [
+   "Sensitive fields stay readable wherever the agent's access reaches",
+   "You cannot show which fields were protected when the agent ran"
+  ]
+ },
+ "agentforce/dd": {
+  "ev": [
+   "Scans objects to find where sensitive data lives",
+   "Produces a field list to compare against what an agent can reach"
+  ],
+  "rk": [
+   "Nobody holds a current list of sensitive fields inside an agent's reach",
+   "New sensitive values appear in free text that no one mapped"
+  ]
+ },
+ "agentforce/dms": {
+  "ev": [
+   "Masks sensitive fields in the sandboxes where agents are built and tested",
+   "A scheduled masking job you can show, with its last run date"
+  ],
+  "rk": [
+   "Agents are built and tested against copies of real customer data",
+   "A sandbox exposure leaks live personal data"
+  ]
+ },
+ "soc1/em": {
+  "ev": [
+   "Logs who ran reports and accessed objects that feed the financial statements",
+   "Gives the auditor a complete population to sample from"
+  ],
+  "rk": [
+   "The auditor cannot sample access, so the control is reported as not tested",
+   "Access to financial data rests on a policy rather than a log"
+  ]
+ },
+ "soc1/fat": {
+  "ev": [
+   "Keeps before and after values on financial fields beyond standard history",
+   "Shows the user and time of each change across the examination period"
+  ],
+  "rk": [
+   "Changes to amount or billing fields cannot be traced to a person",
+   "History ends before the examination period does"
+  ]
+ },
+ "soc1/ar": {
+  "ev": [
+   "Keeps closed-period records retrievable after they leave the live org",
+   "Applies the retention schedule you set"
+  ],
+  "rk": [
+   "A purge removes the population the auditor needs",
+   "You cannot reproduce a closed period on request"
+  ]
+ },
+ "soc2/em": {
+  "ev": [
+   "Logs logins, API access, and exports across the audit window",
+   "Lets the auditor draw a sample from a complete population"
+  ],
+  "rk": [
+   "A sampled user-access item cannot be evidenced",
+   "The control is described but not shown operating across the period"
+  ]
+ },
+ "soc2/fat": {
+  "ev": [
+   "Retains field change history for the full examination period",
+   "Records user, time, and prior value for in-scope fields"
+  ],
+  "rk": [
+   "A sampled change has no history behind it",
+   "Evidence has to be rebuilt by hand under deadline"
+  ]
+ },
+ "soc2/pe": {
+  "ev": [
+   "Shows which in-scope fields are encrypted at rest",
+   "Names who holds and rotates the keys"
+  ],
+  "rk": [
+   "The confidentiality criterion rests on the platform default alone",
+   "The auditor asks for a field list and key owner you cannot supply"
+  ]
+ },
+ "soc2/sc": {
+  "ev": [
+   "Compares security settings against your baseline across orgs",
+   "Shows when a setting drifted and when it was corrected"
+  ],
+  "rk": [
+   "An org drifted during the period and nobody noticed",
+   "The system description claims a configuration the org no longer has"
+  ]
+ },
+ "soc2/br": {
+  "ev": [
+   "A dated restore test with the recovery time achieved",
+   "Backup scope that covers your records, not only platform uptime"
+  ],
+  "rk": [
+   "The availability criterion is claimed but never tested",
+   "A restore fails the first time it is tried"
+  ]
+ },
+ "soc2/ar": {
+  "ev": [
+   "Records retrievable for the retention period in your system description",
+   "Documents where records live after they leave the org"
+  ],
+  "rk": [
+   "You cannot produce a record from the window you committed to",
+   "The system description promises retention you cannot show"
+  ]
+ },
+ "soc2/dms": {
+  "ev": [
+   "Masks real customer data in non-production after each refresh",
+   "A masking run you can show for the audit period"
+  ],
+  "rk": [
+   "Real customer data sits in sandboxes with broader access than production",
+   "The confidentiality criterion is questioned for non-production environments"
+  ]
+ },
+ "iso/em": {
+  "ev": [
+   "Logs authentication and access by user, API client, and integration",
+   "Failed and successful access can be exported for the period"
+  ],
+  "rk": [
+   "The access control is documented but no log supports it",
+   "An internal audit finding becomes a nonconformity"
+  ]
+ },
+ "iso/fat": {
+  "ev": [
+   "Records the prior value, user, and time for tracked changes",
+   "History covers the retention period your ISMS states"
+  ],
+  "rk": [
+   "Changes to configuration or data cannot be traced",
+   "Your ISMS retention period is longer than the history you hold"
+  ]
+ },
+ "iso/pe": {
+  "ev": [
+   "Lists the encrypted fields and the key custodian",
+   "Shows encryption as a configured control, not a platform claim"
+  ],
+  "rk": [
+   "The cryptography control has no field scope or key owner",
+   "The auditor treats the control as unsupported"
+  ]
+ },
+ "iso/sc": {
+  "ev": [
+   "Compares session, password, and connected-app settings with your standard",
+   "Reports drift between management reviews"
+  ],
+  "rk": [
+   "Orgs drift from the configuration standard between reviews",
+   "You find the gap during the audit, not before"
+  ]
+ },
+ "iso/br": {
+  "ev": [
+   "Defines what is backed up and how often",
+   "Keeps a restore test result as a record"
+  ],
+  "rk": [
+   "Backup scope is unclear",
+   "No restore has ever been proven"
+  ]
+ },
+ "iso/ar": {
+  "ev": [
+   "Holds records retrievable at the end of the retention schedule",
+   "Documents where records live and who can delete them"
+  ],
+  "rk": [
+   "A record the schedule requires is gone",
+   "You cannot show who is able to delete retained records"
+  ]
+ },
+ "nist/em": {
+  "ev": [
+   "Logs which accounts, including API identities, were used",
+   "Provides auditable events for review of privileged use"
+  ],
+  "rk": [
+   "Account use cannot be reviewed because it was never logged",
+   "Service and API identities go unreviewed"
+  ]
+ },
+ "nist/fat": {
+  "ev": [
+   "Shows the implemented data change, not only the ticket",
+   "Retains history for the period your plan states"
+  ],
+  "rk": [
+   "The change record shows approval but not what actually changed",
+   "History is shorter than the plan commits to"
+  ]
+ },
+ "nist/pe": {
+  "ev": [
+   "Documents which fields are encrypted under customer-controlled keys",
+   "Shows who can use the keys"
+  ],
+  "rk": [
+   "An assessor cannot inspect the encryption scope",
+   "Key custody is unclear"
+  ]
+ },
+ "nist/sc": {
+  "ev": [
+   "Compares settings with a defined baseline",
+   "Reports drift as it happens, not only at assessment time"
+  ],
+  "rk": [
+   "Monitoring is a screenshot taken before the assessment",
+   "Drift persists between assessments"
+  ]
+ },
+ "nist/br": {
+  "ev": [
+   "Names the objects in the contingency scope",
+   "Keeps the result of the last recovery test"
+  ],
+  "rk": [
+   "The contingency plan covers systems but not your data",
+   "Recovery has never been exercised"
+  ]
+ },
+ "cis/em": {
+  "ev": [
+   "Logs user and API access with timestamps",
+   "Retains logs for the period your policy sets"
+  ],
+  "rk": [
+   "Logs roll off before anyone reviews them",
+   "Access cannot be reconstructed after an event"
+  ]
+ },
+ "cis/fat": {
+  "ev": [
+   "Logs data changes with user, time, and prior value",
+   "Retention matches the control"
+  ],
+  "rk": [
+   "Data changes are not attributable to a person",
+   "Retention is shorter than the control requires"
+  ]
+ },
+ "cis/sc": {
+  "ev": [
+   "Defines a secure baseline for the tenant",
+   "Detects drift across every org"
+  ],
+  "rk": [
+   "Settings are hardened once and never rechecked",
+   "One org falls outside the baseline"
+  ]
+ },
+ "cis/br": {
+  "ev": [
+   "Backs up tenant data separately from the platform",
+   "Restore testing produces a measured recovery time"
+  ],
+  "rk": [
+   "Recovery rests on assumptions",
+   "Recovery time is unknown"
+  ]
+ },
+ "privacy/em": {
+  "ev": [
+   "Logs who accessed records tied to a person",
+   "Answers who saw this person's data for a request or a breach"
+  ],
+  "rk": [
+   "You cannot say who accessed a person's data",
+   "Breach scope has to be assumed wider than it was"
+  ]
+ },
+ "privacy/pe": {
+  "ev": [
+   "Encrypts the personal-data fields you select",
+   "Shows who controls the keys"
+  ],
+  "rk": [
+   "Security measures cannot be shown at field level",
+   "Personal data is readable by any user with record access"
+  ]
+ },
+ "privacy/dd": {
+  "ev": [
+   "Finds personal data in standard, custom, and free-text fields",
+   "Feeds your record of processing"
+  ],
+  "rk": [
+   "You do not know which fields hold personal data",
+   "Free-text notes carry personal data no one mapped"
+  ]
+ },
+ "privacy/ar": {
+  "ev": [
+   "Moves aged personal data out of the live org",
+   "Applies keep-until and delete-after schedules"
+  ],
+  "rk": [
+   "Personal data is kept longer than needed",
+   "You cannot show what was deleted and when"
+  ]
+ },
+ "privacy/dms": {
+  "ev": [
+   "Removes or masks personal data in sandboxes",
+   "Limits what developers and testers can see"
+  ],
+  "rk": [
+   "Real personal data sits in test environments",
+   "Data minimisation is a policy that test data contradicts"
+  ]
+ },
+ "privacy/pc": {
+  "ev": [
+   "Applies retention and deletion policies to personal data",
+   "Supports access and erasure requests with a record of the outcome"
+  ],
+  "rk": [
+   "Requests are handled by hand, late, or incompletely",
+   "You cannot show what was deleted or returned"
+  ]
+ },
+ "privacy-row/em": {
+  "ev": [
+   "Logs who accessed personal information",
+   "Supports access and correction requests with a trail"
+  ],
+  "rk": [
+   "You cannot show who viewed a person's information",
+   "A breach notice has to assume the widest exposure"
+  ]
+ },
+ "privacy-row/pe": {
+  "ev": [
+   "Encrypts selected personal-information fields",
+   "Names the key owner"
+  ],
+  "rk": [
+   "Safeguards are asserted rather than documented",
+   "Personal information stays readable to any user with access"
+  ]
+ },
+ "privacy-row/ar": {
+  "ev": [
+   "Applies retention schedules to personal information",
+   "Keeps a record of destruction"
+  ],
+  "rk": [
+   "Information is kept after its purpose ends",
+   "Destruction cannot be demonstrated"
+  ]
+ },
+ "privacy-row/pc": {
+  "ev": [
+   "Applies retention and deletion policies",
+   "Supports access and deletion requests with a record of the outcome"
+  ],
+  "rk": [
+   "Individual requests miss the response window",
+   "You cannot show how a request was handled"
+  ]
+ },
+ "pci/em": {
+  "ev": [
+   "Logs access to systems that hold cardholder data",
+   "Supports daily log review"
+  ],
+  "rk": [
+   "Access to cardholder data cannot be shown in a log",
+   "Daily review has nothing to review"
+  ]
+ },
+ "pci/fat": {
+  "ev": [
+   "Retains change history on account data and admin settings",
+   "Gives the assessor a retrievable record"
+  ],
+  "rk": [
+   "History ends before the retention the standard requires",
+   "The assessor asks for a project to produce it"
+  ]
+ },
+ "pci/pe": {
+  "ev": [
+   "Encrypts stored account-data fields",
+   "Keeps key custody separate from record readers"
+  ],
+  "rk": [
+   "Stored account data is readable in the clear",
+   "Key management cannot be demonstrated"
+  ]
+ },
+ "pci/dd": {
+  "ev": [
+   "Finds where cardholder data actually sits, including free text",
+   "Defines the scope the assessment covers"
+  ],
+  "rk": [
+   "Card data in notes expands your scope",
+   "You cannot say where cardholder data lives"
+  ]
+ },
+ "pci/sc": {
+  "ev": [
+   "Compares each in-scope org with your hardening standard",
+   "Shows drift between assessments"
+  ],
+  "rk": [
+   "An in-scope org runs a weaker configuration",
+   "Hardening is shown once and then not monitored"
+  ]
+ },
+ "pci/br": {
+  "ev": [
+   "Restores cardholder data after an incident",
+   "Shows a tested recovery path"
+  ],
+  "rk": [
+   "An incident ends with no tested way to restore",
+   "Recovery depends on the platform rather than your data"
+  ]
+ },
+ "pci/ar": {
+  "ev": [
+   "Applies retention limits to cardholder data",
+   "Deletes it when the business purpose ends"
+  ],
+  "rk": [
+   "Card data is kept beyond the business need",
+   "Retention cannot be shown"
+  ]
+ },
+ "pci/dms": {
+  "ev": [
+   "Removes or masks live card data in pre-production",
+   "Makes the masking policy available to the assessor"
+  ],
+  "rk": [
+   "Live card data in sandboxes pulls them into scope",
+   "A test-environment exposure becomes a card-data incident"
+  ]
+ },
+ "glba/em": {
+  "ev": [
+   "Logs who accessed customer information",
+   "Provides logs for an examination"
+  ],
+  "rk": [
+   "Access to customer information is not evidenced",
+   "Examiners receive a policy instead of a log"
+  ]
+ },
+ "glba/pe": {
+  "ev": [
+   "Encrypts selected customer-information fields",
+   "Documents key ownership in the program"
+  ],
+  "rk": [
+   "Encryption is not in the written program",
+   "Fields are readable without a documented reason"
+  ]
+ },
+ "glba/dd": {
+  "ev": [
+   "Finds where customer information lives",
+   "Supports a current inventory"
+  ],
+  "rk": [
+   "The inventory is out of date",
+   "Unmapped fields escape safeguards"
+  ]
+ },
+ "glba/br": {
+  "ev": [
+   "Restores customer information after an event",
+   "Records the last restore test"
+  ],
+  "rk": [
+   "Availability of customer information is untested",
+   "The recovery plan exists only as a document"
+  ]
+ },
+ "glba/sc": {
+  "ev": [
+   "Monitors access and session settings across orgs",
+   "Shows who reviewed drift"
+  ],
+  "rk": [
+   "Settings drift from the program",
+   "Nobody owns the review"
+  ]
+ },
+ "glba/dms": {
+  "ev": [
+   "Masks customer information in test environments",
+   "A scheduled job you can show"
+  ],
+  "rk": [
+   "Customer information sits in development",
+   "The program does not cover test data"
+  ]
+ },
+ "sec/ar": {
+  "ev": [
+   "Keeps records retrievable for the retention period",
+   "Lets you produce a record on request"
+  ],
+  "rk": [
+   "A required record is gone or cannot be found",
+   "You cannot produce records within the time asked"
+  ]
+ },
+ "sec/fat": {
+  "ev": [
+   "Keeps the history of alterations to a record",
+   "Shows who changed what and when"
+  ],
+  "rk": [
+   "Alterations to a record cannot be shown",
+   "The record's integrity is open to challenge"
+  ]
+ },
+ "sox/em": {
+  "ev": [
+   "Logs who ran reports that feed the close",
+   "Logs access by users outside finance"
+  ],
+  "rk": [
+   "Access to close data is untested",
+   "The auditor's sample fails"
+  ]
+ },
+ "sox/fat": {
+  "ev": [
+   "Retains who changed amount, stage, owner, or close fields, and the prior value",
+   "Supports the approval trail"
+  ],
+  "rk": [
+   "A change to a financial field has no trail",
+   "A control deficiency is reported"
+  ]
+ },
+ "sox/ar": {
+  "ev": [
+   "Keeps closed-period data queryable",
+   "Stops purges from removing audit populations"
+  ],
+  "rk": [
+   "Prior-period data is gone",
+   "Auditors cannot compare with last year"
+  ]
+ },
+ "finres/em": {
+  "ev": [
+   "Retains ICT and access logs for the tenant",
+   "Lets you produce logs after an incident"
+  ],
+  "rk": [
+   "Logs do not reach back far enough",
+   "You cannot reconstruct the incident"
+  ]
+ },
+ "finres/sc": {
+  "ev": [
+   "Detects misconfiguration across in-scope orgs",
+   "Notifies owners of drift"
+  ],
+  "rk": [
+   "A regulator finds the misconfiguration first",
+   "Resilience testing misses tenant settings"
+  ]
+ },
+ "finres/br": {
+  "ev": [
+   "Shows tested recovery times for tenant data",
+   "Keeps backups independent of production"
+  ],
+  "rk": [
+   "Recovery objectives are claimed rather than shown",
+   "A failure has no rehearsed path"
+  ]
+ },
+ "nis2/em": {
+  "ev": [
+   "Logs access to the service before and after an incident",
+   "Retains logs long enough to investigate"
+  ],
+  "rk": [
+   "Incident investigation lacks evidence",
+   "Reporting deadlines are missed while logs are located"
+  ]
+ },
+ "nis2/sc": {
+  "ev": [
+   "Monitors tenant configuration against a baseline",
+   "Names the owner of the check"
+  ],
+  "rk": [
+   "Security measures exist on paper only",
+   "Drift goes unnoticed"
+  ]
+ },
+ "nis2/br": {
+  "ev": [
+   "Documents data recovery for continuity",
+   "Keeps test results"
+  ],
+  "rk": [
+   "Continuity plans omit tenant data",
+   "Recovery fails when it is needed"
+  ]
+ },
+ "hipaa/em": {
+  "ev": [
+   "Logs who accessed ePHI, including integrations",
+   "Supports privacy investigations of impermissible use"
+  ],
+  "rk": [
+   "Impermissible access cannot be investigated",
+   "An audit-controls request cannot be met"
+  ]
+ },
+ "hipaa/fat": {
+  "ev": [
+   "Retains who changed a clinical or billing field, and the prior value",
+   "Supports amendment requests"
+  ],
+  "rk": [
+   "The integrity of records cannot be shown",
+   "Amendments cannot be traced"
+  ]
+ },
+ "hipaa/pe": {
+  "ev": [
+   "Encrypts selected ePHI fields",
+   "Documents the decision on the addressable specification"
+  ],
+  "rk": [
+   "The addressable specification is not documented",
+   "ePHI is readable in the clear to broad access"
+  ]
+ },
+ "hipaa/dd": {
+  "ev": [
+   "Finds ePHI in notes and attachments",
+   "Informs the risk analysis"
+  ],
+  "rk": [
+   "The risk analysis misses where ePHI lives",
+   "ePHI sits in unprotected free text"
+  ]
+ },
+ "hipaa/br": {
+  "ev": [
+   "Includes ePHI in backup scope",
+   "Shows a tested restore of a deleted record"
+  ],
+  "rk": [
+   "The contingency plan has no tested restore",
+   "Lost ePHI cannot be recovered"
+  ]
+ },
+ "hipaa/ar": {
+  "ev": [
+   "Retains required documentation for six years",
+   "Keeps documents retrievable after a live-org cleanup"
+  ],
+  "rk": [
+   "Required documentation is gone",
+   "A cleanup removes records you still need"
+  ]
+ },
+ "hipaa/dms": {
+  "ev": [
+   "Masks ePHI in sandboxes",
+   "Limits testers to the minimum necessary data"
+  ],
+  "rk": [
+   "ePHI sits in test environments",
+   "The risk analysis ignores non-production"
+  ]
+ },
+ "ferpa/em": {
+  "ev": [
+   "Logs who accessed a student's record",
+   "Supports a review of legitimate educational interest"
+  ],
+  "rk": [
+   "You cannot show who viewed a student record",
+   "A complaint cannot be answered"
+  ]
+ },
+ "ferpa/pe": {
+  "ev": [
+   "Encrypts selected education-record fields",
+   "Names the key owner"
+  ],
+  "rk": [
+   "Protection is asserted rather than shown",
+   "Records are readable to broad roles"
+  ]
+ },
+ "ferpa/ar": {
+  "ev": [
+   "Keeps records for the period required",
+   "Deletes them when permitted"
+  ],
+  "rk": [
+   "Records are lost or kept too long",
+   "A request cannot be fulfilled after a student leaves"
+  ]
+ },
+ "fedramp/em": {
+  "ev": [
+   "Gives a customer-side log of access to agency data",
+   "Can be exported for the agency"
+  ],
+  "rk": [
+   "The platform authorization is mistaken for tenant evidence",
+   "The agency requests logs you cannot export"
+  ]
+ },
+ "fedramp/sc": {
+  "ev": [
+   "Compares the tenant with the agency baseline",
+   "Monitors drift on an ongoing basis"
+  ],
+  "rk": [
+   "Tenant settings fall outside the baseline",
+   "Nobody owns tenant configuration"
+  ]
+ },
+ "fedramp/br": {
+  "ev": [
+   "Restores agency data within the customer's boundary",
+   "Keeps test results"
+  ],
+  "rk": [
+   "Contingency for tenant data is untested",
+   "Backups sit outside the boundary"
+  ]
+ },
+ "ai/em": {
+  "ev": [
+   "Logs the user and identity behind access, where your release covers agents",
+   "Provides a log for a high-risk use"
+  ],
+  "rk": [
+   "Logging for a high-risk use cannot be shown",
+   "Oversight claims lack records"
+  ]
+ },
+ "ai/fat": {
+  "ev": [
+   "Tracks agent-driven field changes and prior values",
+   "Helps show who accepted a change"
+  ],
+  "rk": [
+   "Human oversight of writes cannot be shown",
+   "Agent changes cannot be told apart from human ones"
+  ]
+ },
+ "ai/pe": {
+  "ev": [
+   "Encrypts selected fields in an agent's reach",
+   "Names key ownership"
+  ],
+  "rk": [
+   "Sensitive data reaches agents unprotected",
+   "The AI system inventory omits data exposure"
+  ]
+ },
+ "ai/dd": {
+  "ev": [
+   "Identifies sensitive fields an agent can reach",
+   "Feeds the AI system inventory"
+  ],
+  "rk": [
+   "The inventory is out of date",
+   "Sensitive fields are unknown to the AI governance team"
+  ]
+ },
+ "ai/dms": {
+  "ev": [
+   "Masks data used to build and test agents",
+   "Shows how test data differs from production"
+  ],
+  "rk": [
+   "Agents are built on real personal data",
+   "Governance cannot show what a model saw during development"
+  ]
+ },
+ "ins/em": {
+  "ev": [
+   "Exports access logs for the period the questionnaire asks about",
+   "Attributes access to a user or integration"
+  ],
+  "rk": [
+   "You answer yes without a log behind it",
+   "Coverage terms are questioned when evidence is thin"
+  ]
+ },
+ "ins/sc": {
+  "ev": [
+   "Reports SaaS misconfiguration across orgs",
+   "Provides a current result"
+  ],
+  "rk": [
+   "The misconfiguration answer is a statement, not a report",
+   "The answer cannot be backed up at renewal"
+  ]
+ },
+ "ins/br": {
+  "ev": [
+   "Keeps backups apart from data an attacker could delete",
+   "Records the last restore test and recovery time"
+  ],
+  "rk": [
+   "The ransomware answer is untested",
+   "Recovery time is a guess"
+  ]
+ },
+ "ins/pe": {
+  "ev": [
+   "Lists encrypted fields and key owners",
+   "Shows more than the platform default"
+  ],
+  "rk": [
+   "The data-at-rest answer cannot be supported",
+   "Follow-up questions go unanswered"
+  ]
+ }
+};
+    Object.keys(branches).forEach((sid) => branches[sid].forEach((it) => {
+      const x = detail[sid + "/" + it.key];
+      if (x) { it.evidence = x.ev; it.risk = x.rk; }
+    }));
+
     const groups = [
       { label: "Agent Trust & Readiness", ids: ["agentforce"] },
       { label: "Security and Information Management", ids: ["soc1", "soc2", "iso", "nist", "cis"] },
@@ -530,7 +1494,6 @@
         std.id = "std-" + id;
         if (id === "agentforce") {
           std.classList.add("nohead");
-          std.addEventListener("toggle", () => { if (!std.open) std.open = true; });
         }
         const sum = el("summary");
         sum.appendChild(el("span", "lbl", byId[id].label));
@@ -544,7 +1507,7 @@
           lf.appendChild(el("h3", null, item.title));
           lf.appendChild(el("p", "cite", item.cite));
           const how = el("div", "how");
-          how.appendChild(el("span", null, "Example of Required Evidence"));
+          how.appendChild(el("span", null, "Questions you should be able to answer"));
           const ol = el("ol"); bullets(ol, item.asks); how.appendChild(ol);
           lf.appendChild(how);
           const more = el("details", "more");
@@ -557,7 +1520,7 @@
           const label = el("label", "gap-check");
           const cb = el("input", "gap-box"); cb.type = "checkbox"; cb.id = "gap-" + (boxId++);
           label.appendChild(cb);
-          label.appendChild(document.createTextNode("Add to Requirements Summary"));
+          label.appendChild(document.createTextNode("Add to Compliance Requirements Summary"));
           lf.appendChild(label);
           leaves.appendChild(lf);
           return { lf, item };
@@ -575,7 +1538,10 @@
     const chipBtns = [];
     function setProduct(key) {
       state.product = key;
-      chipBtns.forEach((c) => c.b.setAttribute("aria-pressed", String(c.key === key)));
+      chipBtns.forEach((c) => {
+        c.b.setAttribute("aria-pressed", String(c.key === key));
+        c.b.classList.toggle("bundled", key === "shield" && SHIELD_BUNDLE.includes(c.key));
+      });
       apply();
     }
     function mkChip(label, key) {
@@ -595,10 +1561,13 @@
     document.getElementById("expandAll").addEventListener("click", () => {
       allOpen = true;
       Object.values(stdEls).forEach((s) => (s.std.open = true));
+      stdEls.agentforce.group.open = true;
     });
     document.getElementById("collapseAll").addEventListener("click", () => {
       allOpen = false;
       Object.values(stdEls).forEach((s) => (s.std.open = false));
+      stdEls.agentforce.std.open = true; /* headerless; the group heading collapses it */
+      stdEls.agentforce.group.open = false;
     });
 
     function apply() {
@@ -628,22 +1597,44 @@
         stdEls[g.ids[0]].group.hidden = !groupHas;
         if (filtering && groupHas) stdEls[g.ids[0]].group.open = true;
       });
-      document.getElementById("count").textContent = filtering ? "Showing " + shown + " of " + total + " evidence areas" : "";
+      document.getElementById("count").textContent = filtering ? "Showing " + shown + " of " + total + " requirements" : "";
     }
     apply();
 
-    /* product cards */
-    const prodCards = document.getElementById("prodCards");
-    pkeys.forEach((k) => {
+    /* product list and detail panel */
+    const prodList = document.getElementById("prodList");
+    const prodPanel = document.getElementById("prodPanel");
+    const prodBtns = [];
+    function showProduct(k) {
       const p = P[k];
-      const c = el("div", "card prod");
-      c.appendChild(el("span", "tag", p.title));
-      c.appendChild(el("h3", null, p.product));
-      c.appendChild(el("p", null, p.provides));
-      c.appendChild(el("div", "lab", "If you cannot show it"));
-      c.appendChild(el("p", "risk", p.risk[0]));
-      prodCards.appendChild(c);
+      prodBtns.forEach((x) => { x.b.setAttribute("aria-selected", String(x.k === k)); x.b.tabIndex = x.k === k ? 0 : -1; });
+      prodPanel.textContent = "";
+      prodPanel.appendChild(el("span", "tag", p.title));
+      prodPanel.appendChild(el("h3", null, p.product));
+      const block = (label, cls, content) => {
+        prodPanel.appendChild(el("h4", "pp-lab " + (cls || ""), label));
+        if (Array.isArray(content)) { const ul = el("ul"); bullets(ul, content); prodPanel.appendChild(ul); }
+        else prodPanel.appendChild(el("p", null, content));
+      };
+      block("What it gives you", "", p.provides);
+      block("The gap it closes", "", p.evidence);
+      block("The risk without it", "risk", p.risk);
+    }
+    pkeys.forEach((k) => {
+      const b = el("button", "prodbtn", P[k].product);
+      b.type = "button"; b.setAttribute("role", "tab");
+      b.addEventListener("click", () => showProduct(k));
+      b.addEventListener("keydown", (e) => {
+        const i = pkeys.indexOf(k);
+        if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+          e.preventDefault();
+          const n = pkeys[(i + (e.key === "ArrowDown" ? 1 : -1) + pkeys.length) % pkeys.length];
+          showProduct(n); prodBtns.find((x) => x.k === n).b.focus();
+        }
+      });
+      prodBtns.push({ b, k }); prodList.appendChild(b);
     });
+    showProduct(pkeys[0]);
 
     /* coverage matrix */
     (function () {
@@ -685,7 +1676,7 @@
       const checked = Array.from(document.querySelectorAll(".gap-box:checked"));
       sumList.textContent = "";
       if (checked.length === 0) {
-        sumList.appendChild(el("p", "sum-empty", "Nothing selected yet. Check requirements in the Compliance categories above."));
+        sumList.appendChild(el("p", "sum-empty", "Nothing selected yet. Check requirements in the Compliance Categories above."));
         return;
       }
       const order = [];
@@ -721,7 +1712,7 @@
       const msg = document.getElementById("pdf-out");
       msg.hidden = false;
       const checked = Array.from(document.querySelectorAll(".gap-box:checked"));
-      if (!checked.length) { msg.textContent = "Check at least one requirement in the Compliance categories section first, then select Summarize Findings."; return; }
+      if (!checked.length) { msg.textContent = "Check at least one requirement in the Compliance Categories section first, then select Export Summary Findings."; return; }
       if (!window.jspdf) { msg.textContent = "The PDF tool did not load. Check your connection and try again, or use Copy Summary above."; return; }
 
       const clean = (s) => String(s).replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, "-").replace(/−/g, "-").replace(/[^\x20-\x7E -ÿ]/g, "");
@@ -833,6 +1824,93 @@
       render();
     })();
 
+
+    /* agent lifecycle wheel */
+    (function () {
+      const stages = [
+        { name: ["Ideate", "& Plan"], title: "Ideate & Plan", tag: "Stage 1 of 5",
+          ch: ["No clear use case, owner, or success measure for the agent", "No inventory of the sensitive data the agent could need", "Policy and compliance requirements are not part of the plan"],
+          risk: "An agent is approved without anyone knowing what data it will touch or who is accountable for it.",
+          prods: ["dd", "pc"] },
+        { name: ["Build"], title: "Build", tag: "Stage 2 of 5",
+          ch: ["Agents are often built in sandboxes that hold copies of real data", "Builders can reach more data than the agent needs", "Sensitive fields are not classified or encrypted before the agent can reach them"],
+          risk: "Real customer data spreads into development environments, and sensitive fields are exposed to the agent.",
+          prods: ["dms", "pe", "dd"] },
+        { name: ["Test"], title: "Test", tag: "Stage 3 of 5",
+          ch: ["Testing runs on unmasked or partial copies of production data", "Few records show what was tested, with which inputs, and who approved the result", "Risks such as prompt injection and unsafe output are checked ad hoc"],
+          risk: "An agent reaches production without evidence it was tested, or tests exposed real customer data.",
+          prods: ["dms", "sc"] },
+        { name: ["Deploy"], title: "Deploy", tag: "Stage 4 of 5",
+          ch: ["Agents can act at volume, so one mistake can touch many records at once", "Agent permissions are broader than the task needs", "There is no tested way to undo a mass update or delete"],
+          risk: "A mass update or delete by an agent cannot be traced or undone, and customers feel the damage first.",
+          prods: ["br", "fat", "sc"] },
+        { name: ["Observe"], title: "Observe", tag: "Stage 5 of 5",
+          ch: ["Tracing and logging have to be turned on and kept, and they do not backfill history", "It is hard to tell which user invoked which agent, on which data", "Logs age out before an audit or incident review needs them"],
+          risk: "You cannot reconstruct what an agent did, so an audit, incident review, or security questionnaire goes unanswered.",
+          prods: ["em", "fat"] },
+        { name: ["Govern"], title: "Govern", tag: "Across every stage",
+          ch: ["Ownership and policy are hard to keep consistent as agents multiply", "Settings drift between orgs and environments", "Evidence of approvals and changes is patchy and not retained"],
+          risk: "Policies exist on paper, but nobody can show that agents and settings follow them over time.",
+          prods: ["sc", "ar"] }
+      ];
+      const svg = document.getElementById("lcWheel");
+      const panel = document.getElementById("lcPanel");
+      const NS = "http://www.w3.org/2000/svg";
+      const cx = 200, cy = 200, R = 185, r = 88, gap = 2.5;
+      const pt = (rad, deg) => [cx + rad * Math.cos(deg * Math.PI / 180), cy + rad * Math.sin(deg * Math.PI / 180)];
+      const segs = [];
+      const N = stages.length;
+      function wire(g, i, label) {
+        g.setAttribute("tabindex", "0"); g.setAttribute("role", "button"); g.setAttribute("aria-label", label);
+        g.addEventListener("click", () => show(i));
+        g.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(i); }
+          if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); show((i + 1) % N); segs[(i + 1) % N].focus(); }
+          if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); show((i + N - 1) % N); segs[(i + N - 1) % N].focus(); }
+        });
+        svg.appendChild(g); segs.push(g);
+      }
+      stages.slice(0, 5).forEach((st, i) => {
+        const a0 = -90 + i * 72 + gap, a1 = -90 + (i + 1) * 72 - gap;
+        const [x0, y0] = pt(R, a0), [x1, y1] = pt(R, a1), [x2, y2] = pt(r, a1), [x3, y3] = pt(r, a0);
+        const g = document.createElementNS(NS, "g");
+        g.setAttribute("class", "seg");
+        const path = document.createElementNS(NS, "path");
+        path.setAttribute("d", "M" + x0 + " " + y0 + " A" + R + " " + R + " 0 0 1 " + x1 + " " + y1 + " L" + x2 + " " + y2 + " A" + r + " " + r + " 0 0 0 " + x3 + " " + y3 + " Z");
+        g.appendChild(path);
+        const mid = -90 + i * 72 + 36;
+        const [tx, ty] = pt((R + r) / 2, mid);
+        const num = document.createElementNS(NS, "text"); num.setAttribute("class", "num"); num.setAttribute("x", tx); num.setAttribute("y", ty - 12); num.textContent = String(i + 1); g.appendChild(num);
+        st.name.forEach((line, j) => { const t = document.createElementNS(NS, "text"); t.setAttribute("x", tx); t.setAttribute("y", ty + 6 + j * 16); t.textContent = line; g.appendChild(t); });
+        wire(g, i, "Stage " + (i + 1) + ": " + st.title);
+      });
+      const hub = document.createElementNS(NS, "g"); hub.setAttribute("class", "hubseg");
+      const hc = document.createElementNS(NS, "circle"); hc.setAttribute("cx", cx); hc.setAttribute("cy", cy); hc.setAttribute("r", 70); hub.appendChild(hc);
+      const ht = document.createElementNS(NS, "text"); ht.setAttribute("x", cx); ht.setAttribute("y", cy + 6); ht.textContent = "Govern"; hub.appendChild(ht);
+      wire(hub, 5, "Govern: applies across every stage");
+
+      function show(i) {
+        const st = stages[i];
+        segs.forEach((g, k) => g.classList.toggle("on", k === i));
+        panel.textContent = "";
+        panel.appendChild(el("span", "tag", st.tag));
+        panel.appendChild(el("h3", null, st.title));
+        panel.appendChild(el("h4", null, "Common challenges"));
+        const ul = el("ul"); bullets(ul, st.ch); panel.appendChild(ul);
+        panel.appendChild(el("h4", "q", "The Risk Involved"));
+        panel.appendChild(el("p", "qtext", st.risk));
+        panel.appendChild(el("h4", null, "Salesforce products that help"));
+        const pills = el("div", "lcpills");
+        st.prods.forEach((k) => {
+          const b = el("button", null, P[k].product); b.type = "button";
+          b.title = "Show the matching requirements in Compliance Categories";
+          b.addEventListener("click", () => { setProduct(k); document.getElementById("explore").scrollIntoView({ behavior: "smooth" }); });
+          pills.appendChild(b);
+        });
+        panel.appendChild(pills);
+      }
+      show(0);
+    })();
   </script>
 </body>
 </html>
