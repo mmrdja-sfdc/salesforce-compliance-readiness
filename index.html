@@ -1483,7 +1483,7 @@
 
     groups.forEach((group) => {
       const details = el("details", "group");
-      details.open = true;
+      details.open = !group.ids.includes("agentforce"); /* Agent Trust & Readiness starts collapsed */
       const summary = el("summary");
       summary.appendChild(el("span", "dot"));
       summary.appendChild(document.createTextNode(group.label));
